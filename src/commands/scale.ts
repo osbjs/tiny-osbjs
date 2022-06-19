@@ -4,6 +4,15 @@ import { Command } from 'src/types/Command'
 import { Easing } from 'src/types/Easing'
 import { Timestamp } from 'src/types/Timestamp'
 
+/**
+ * Change the size of the object relative to its original size.
+ *
+ * @param startTime Time in milliseconds/timestamp indicate when the event will start.
+ * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ * @param startScale Scale factor at the start of the animation.
+ * @param endScale Scale factor at the end of the animation.
+ * @param easing How the command should "accelerate".
+ */
 export function scale(
 	startTime: number | Timestamp,
 	endTime: number | Timestamp,
@@ -22,6 +31,12 @@ export function scale(
 	})
 }
 
+/**
+ * Shorthand command for `scale` when `startTime` and `endTime` are equal.
+ *
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * @param scale Scale factor at the given time.
+ */
 export function scaleAtTime(time: number | Timestamp, scale: number) {
 	addCommandToCurrentObject<Command>({
 		__name__: 'Scale',

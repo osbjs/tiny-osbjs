@@ -9,7 +9,7 @@ import { Command, LoopCommand, ParameterCommand, TriggerCommand } from './types/
 import { Vector2 } from './types/Vector2'
 
 /**
- * Generated osb string
+ * Generate osb string that can be used to create osb file or replace [Events] section in osu file.
  */
 export function generateStoryboardOsb(): string {
 	return getObjects()

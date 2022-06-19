@@ -5,6 +5,15 @@ import { Easing } from 'src/types/Easing'
 import { Timestamp } from 'src/types/Timestamp'
 import { Vector2 } from 'src/types/Vector2'
 
+/**
+ * Change the location of the object in the play area.
+ *
+ * @param startTime Time in milliseconds/timestamp indicate when the event will start.
+ * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ * @param startPosition Position at the start of the animation.
+ * @param endPosition Position at the end of the animation.
+ * @param easing How the command should "accelerate".
+ */
 export function move(
 	startTime: number | Timestamp,
 	endTime: number | Timestamp,
@@ -23,6 +32,12 @@ export function move(
 	})
 }
 
+/**
+ * Shorthand command for `move` when `startTime` and `endTime` are equal.
+ *
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * @param position Position at the given time.
+ */
 export function moveAtTime(time: number | Timestamp, position: Vector2) {
 	addCommandToCurrentObject<Command>({
 		__name__: 'Move',

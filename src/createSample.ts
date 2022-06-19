@@ -17,6 +17,7 @@ export enum SampleLayer {
 
 /**
  * Create a storyboard audio sample.
+ *
  * @param startTime Time in milliseconds/timestamp that the sound should start playing.
  * @param layer The layer you want the sound to be on.
  * @param path Path to the audio file relative to the beatmap folder.

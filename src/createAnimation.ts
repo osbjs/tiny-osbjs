@@ -20,6 +20,7 @@ export type AnimationLoopType = 'LoopForever' | 'LoopOnce'
 
 /**
  * Create a new Animation.
+ *
  * @param path Path to the image file relative to the beatmap folder.
  * For example, specify a filename like "sliderball.png", and name your files "sliderball0.png" to "sliderball9.png" for a 10 frame animation.
  * @param layer The layer the object appears on.

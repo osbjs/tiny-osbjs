@@ -15,6 +15,7 @@ export type Sprite = {
 
 /**
  * Create a new sprite.
+ *
  * @param path Path to the image file relative to the beatmap folder.
  * @param layer The layer the object appears on.
  * @param origin is where on the image should osu! consider that image's origin (coordinate) to be.

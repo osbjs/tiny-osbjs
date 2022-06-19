@@ -4,6 +4,15 @@ import { Command } from 'src/types/Command'
 import { Easing } from 'src/types/Easing'
 import { Timestamp } from 'src/types/Timestamp'
 
+/**
+ * Change the Y coordinate of the object.
+ *
+ * @param startTime Time in milliseconds/timestamp indicate when the event will start.
+ * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ * @param startY Y coordinate at the start of the animation.
+ * @param endY Y coordinate at the end of the animation.
+ * @param easing How the command should "accelerate".
+ */
 export function moveY(startTime: number | Timestamp, endTime: number | Timestamp, startY: number, endY: number, easing: Easing = Easing.Linear) {
 	addCommandToCurrentObject<Command>({
 		__name__: 'MoveX',
@@ -16,6 +25,12 @@ export function moveY(startTime: number | Timestamp, endTime: number | Timestamp
 	})
 }
 
+/**
+ * Shorthand command for `moveY` when `startTime` and `endTime` are equal.
+ *
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * @param y Y coordinate at the given time.
+ */
 export function moveYAtTime(time: number | Timestamp, y: number) {
 	addCommandToCurrentObject<Command>({
 		__name__: 'MoveX',
