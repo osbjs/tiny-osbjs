@@ -7,7 +7,7 @@ export default [
 			file: 'dist/cjs/index.js',
 			format: 'cjs',
 		},
-		plugins: [ts()],
+		plugins: [ts('tsconfig.build.json')],
 	},
 	{
 		input: 'src/index.ts',
@@ -15,6 +15,13 @@ export default [
 			file: 'dist/es/index.js',
 			format: 'es',
 		},
-		plugins: [ts({ tsconfig: { declaration: false } })],
+		plugins: [
+			ts({
+				tsconfig: {
+					fileName: 'tsconfig.build.json',
+					hook: (resolvedConfig) => ({ ...resolvedConfig, declaration: false }),
+				},
+			}),
+		],
 	},
 ]

@@ -10,9 +10,8 @@
 		"declarationDir": "./dist/types",
 		"sourceMap": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "./",
+		"baseUrl": "./src",
 		"skipLibCheck": true
 	},
-	"include": ["src/**/*"],
-	"exclude": ["test", "dist", "node_modules"]
+	"exclude": ["dist", "node_modules"]
 }
