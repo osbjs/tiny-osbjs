@@ -5,6 +5,7 @@ import { Sample } from './createSample'
 import { Sprite } from './createSprite'
 import { Command, ParameterCommand, LoopCommand, TriggerCommand } from './types/Command'
 
+
 const STORYBOARD_CONTEXT: Context = {
 	objects: [],
 	isInvokingCommand: false,

@@ -6,7 +6,8 @@
 	"module": "dist/es/index.js",
 	"scripts": {
 		"build": "rollup -c",
-		"prepare": "npm run build"
+		"prepare": "npm run build",
+		"test": "jest"
 	},
 	"types": "dist/types/index.d.ts",
 	"keywords": [
