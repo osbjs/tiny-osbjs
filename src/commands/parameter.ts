@@ -1,7 +1,7 @@
-import { addCommandToCurrentObject } from 'src/context'
-import { tryParseTimestamp } from 'src/tryParseTimestamp'
-import { Parameter, ParameterCommand } from 'src/types/Command'
-import { Easing } from 'src/types/Easing'
+import { addCommandToCurrentObject } from 'context'
+import { tryParseTimestamp } from 'tryParseTimestamp'
+import { Parameter, ParameterCommand } from 'types/Command'
+import { Easing } from 'types/Easing'
 
 /**
  * Unlike the other commands, which can be seen as setting endpoints along continually-tracked values,

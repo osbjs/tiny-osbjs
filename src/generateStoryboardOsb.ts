@@ -1,99 +1,61 @@
-import { isCommand, isParameterCommand, isLoopCommand, isTriggerCommand } from './checkCommandType'
-import { isSprite, isAnimation, isSample } from './checkObjectType'
-import { getObjects } from './context'
-import { Animation } from './createAnimation'
-import { Sample } from './createSample'
-import { Sprite } from './createSprite'
-import { Color } from './types/Color'
-import { Command, LoopCommand, ParameterCommand, TriggerCommand } from './types/Command'
-import { Vector2 } from './types/Vector2'
+import { isSprite, isAnimation, isSample, isBackground, isVideo } from 'checkObjectType'
+import { getObjects } from 'context'
+import { Animation } from 'createAnimation'
+import { Background } from 'createBackground'
+import { Sample } from 'createSample'
+import { Sprite } from 'createSprite'
+import { Video } from 'createVideo'
+import { getBackgroundOsb, getVideoOsb, getSpriteOsb, getAnimationOsb, getSampleOsb } from 'getObjectOsb'
 
 /**
  * Generate osb string that can be used to create osb file or replace [Events] section in osu file.
  */
 export function generateStoryboardOsb(): string {
-	return getObjects()
-		.map((object) =>
-			isSprite(object) ? getSpriteOsb(object) : isAnimation(object) ? getAnimationOsb(object) : isSample(object) ? getSampleOsb(object) : ''
-		)
-		.join('\n')
+	const objects = getObjects()
+
+	const { backgroundAndVideo, background, foreground, fail, pass, overlay, sample } = extractStoryboardLayers(objects)
+
+	return (
+		'[Events]\n' +
+		'//Background and Video events\n' +
+		backgroundAndVideo.map((object) => (isBackground(object) ? getBackgroundOsb(object) : isVideo(object) ? getVideoOsb(object) : '')).join('') +
+		'//Storyboard Layer 0 (Background)\n' +
+		background.map((object) => (isSprite(object) ? getSpriteOsb(object) : isAnimation(object) ? getAnimationOsb(object) : '')).join('') +
+		'//Storyboard Layer 1 (Foreground)\n' +
+		foreground.map((object) => (isSprite(object) ? getSpriteOsb(object) : isAnimation(object) ? getAnimationOsb(object) : '')).join('') +
+		'//Storyboard Layer 2 (Fail)\n' +
+		fail.map((object) => (isSprite(object) ? getSpriteOsb(object) : isAnimation(object) ? getAnimationOsb(object) : '')).join('') +
+		'//Storyboard Layer 3 (Pass)\n' +
+		pass.map((object) => (isSprite(object) ? getSpriteOsb(object) : isAnimation(object) ? getAnimationOsb(object) : '')).join('') +
+		'//Storyboard Layer 4 (Overlay)\n' +
+		overlay.map((object) => (isSprite(object) ? getSpriteOsb(object) : isAnimation(object) ? getAnimationOsb(object) : '')).join('') +
+		'//Storyboard Sound Samples\n' +
+		sample.map((object) => (isSample(object) ? getSampleOsb(object) : '')).join('')
+	)
 }
 
-export function getSpriteOsb({ type, layer, origin, path, initialPosition, commands }: Sprite): string {
-	return [type, layer, origin, `"${path}"`, initialPosition.x, initialPosition.y].join(',').concat('\n').concat(translateCommandsToOsb(commands))
+export type StoryboardLayers = {
+	backgroundAndVideo: (Background | Video)[]
+	background: (Sprite | Animation)[]
+	foreground: (Sprite | Animation)[]
+	fail: (Sprite | Animation)[]
+	pass: (Sprite | Animation)[]
+	overlay: (Sprite | Animation)[]
+	sample: Sample[]
 }
 
-export function getAnimationOsb({ type, layer, origin, path, initialPosition, commands, frameCount, frameDelay, loopType }: Animation): string {
-	return [type, layer, origin, `"${path}"`, initialPosition.x, initialPosition.y, frameCount, frameDelay, loopType]
-		.join(',')
-		.concat('\n')
-		.concat(translateCommandsToOsb(commands))
-}
-
-export function getSampleOsb({ type, layer, path, volume, startTime }: Sample): string {
-	return [type, startTime, layer, `"${path}"`, volume].join(',').concat('\n')
-}
-
-export function translateCommandsToOsb(commands: (Command | ParameterCommand | LoopCommand | TriggerCommand)[], depth: 1 | 2 = 1): string {
-	return commands
-		.map((command) =>
-			isCommand(command)
-				? translateCommandToOsb(command, depth)
-				: isParameterCommand(command)
-				? translateParameterCommandToOsb(command, depth)
-				: isLoopCommand(command)
-				? translateLoopCommandToOsb(command)
-				: isTriggerCommand(command)
-				? translateTriggerCommandToOsb(command)
-				: ''
-		)
-		.join('\n')
-}
-
-export function translateCommandToOsb({ type, startTime, endTime, startValue, endValue, easing }: Command, depth: 1 | 2): string {
-	function isValueVector2(value: number | Vector2 | Color): value is Vector2 {
-		return type === 'M' || type === 'V'
+export function extractStoryboardLayers(objects: (Sprite | Animation | Sample | Video | Background)[]): StoryboardLayers {
+	return {
+		backgroundAndVideo: objects.filter((object): object is Background | Video => isBackground(object) || isVideo(object)),
+		background: objects.filter(
+			(object): object is Animation | Sprite => (isAnimation(object) || isSprite(object)) && object.layer === 'Background'
+		),
+		foreground: objects.filter(
+			(object): object is Animation | Sprite => (isAnimation(object) || isSprite(object)) && object.layer === 'Foreground'
+		),
+		fail: objects.filter((object): object is Animation | Sprite => (isAnimation(object) || isSprite(object)) && object.layer === 'Fail'),
+		pass: objects.filter((object): object is Animation | Sprite => (isAnimation(object) || isSprite(object)) && object.layer === 'Pass'),
+		overlay: objects.filter((object): object is Animation | Sprite => (isAnimation(object) || isSprite(object)) && object.layer === 'Overlay'),
+		sample: objects.filter((object): object is Sample => isSample(object)),
 	}
-
-	function isValueColor(value: number | Vector2 | Color): value is Color {
-		return type === 'C'
-	}
-
-	if (isValueColor(startValue) && isValueColor(endValue)) {
-		return [
-			depth === 1 ? ' ' : '  ',
-			type,
-			startTime,
-			endTime,
-			startValue.r,
-			startValue.g,
-			startValue.b,
-			endValue.r,
-			endValue.g,
-			endValue.b,
-			easing,
-		].join(',')
-	} else if (isValueVector2(startValue) && isValueVector2(endValue)) {
-		return [type, startTime, endTime, startValue.x, startValue.y, endValue.x, endValue.y, easing].join(',').concat('\n')
-	} else {
-		return [type, startTime, endTime, startValue, endValue, easing].join(',').concat('\n')
-	}
-}
-
-export function translateParameterCommandToOsb(parameterCommand: ParameterCommand, depth: 1 | 2): string {
-	const { type, easing, startTime, endTime, parameter } = parameterCommand
-
-	return [depth === 1 ? ' ' : '  ', type, easing, startTime, endTime, parameter].join(',')
-}
-
-export function translateLoopCommandToOsb(loopCommand: LoopCommand): string {
-	const { type, startTime, count, commands } = loopCommand
-
-	return [type, startTime, count].join(',').concat('\n').concat(translateCommandsToOsb(commands, 2))
-}
-
-export function translateTriggerCommandToOsb(triggerCommand: TriggerCommand): string {
-	const { type, triggerName, startTime, endTime, commands } = triggerCommand
-
-	return [type, triggerName, startTime, endTime].join(',').concat('\n').concat(translateCommandsToOsb(commands, 2))
 }

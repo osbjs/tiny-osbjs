@@ -1,10 +1,11 @@
-import { isLoopCommand, isTriggerCommand } from './checkCommandType'
-import { isSprite, isAnimation } from './checkObjectType'
-import { Animation } from './createAnimation'
-import { Sample } from './createSample'
-import { Sprite } from './createSprite'
-import { Command, ParameterCommand, LoopCommand, TriggerCommand } from './types/Command'
-
+import { isLoopCommand, isTriggerCommand } from 'checkCommandType'
+import { isSprite, isAnimation } from 'checkObjectType'
+import { Animation } from 'createAnimation'
+import { Background } from 'createBackground'
+import { Sample } from 'createSample'
+import { Sprite } from 'createSprite'
+import { Video } from 'createVideo'
+import { Command, ParameterCommand, LoopCommand, TriggerCommand } from 'types/Command'
 
 const STORYBOARD_CONTEXT: Context = {
 	objects: [],
@@ -14,17 +15,17 @@ const STORYBOARD_CONTEXT: Context = {
 }
 
 export type Context = {
-	objects: (Sprite | Animation | Sample)[]
+	objects: (Sprite | Animation | Sample | Video | Background)[]
 	isInvokingCommand: boolean
 	isInvokingLoop: boolean
 	isInvokingTrigger: boolean
 }
 
-export function getObjects(): (Sprite | Animation | Sample)[] {
+export function getObjects(): (Sprite | Animation | Sample | Video | Background)[] {
 	return STORYBOARD_CONTEXT.objects
 }
 
-export function addObject<T extends Sprite | Animation | Sample>(object: T) {
+export function addObject<T extends Sprite | Animation | Sample | Video | Background>(object: T) {
 	return STORYBOARD_CONTEXT.objects.push(object)
 }
 

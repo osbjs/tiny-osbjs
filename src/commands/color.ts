@@ -1,9 +1,9 @@
-import { addCommandToCurrentObject } from 'src/context'
-import { tryParseTimestamp } from 'src/tryParseTimestamp'
-import { Color } from 'src/types/Color'
-import { Command } from 'src/types/Command'
-import { Easing } from 'src/types/Easing'
-import { Timestamp } from 'src/types/Timestamp'
+import { addCommandToCurrentObject } from 'context'
+import { tryParseTimestamp } from 'tryParseTimestamp'
+import { Color } from 'types/Color'
+import { Command } from 'types/Command'
+import { Easing } from 'types/Easing'
+import { Timestamp } from 'types/Timestamp'
 
 /**
  * The virtual light source colour on the object. The colours of the pixels on the object are determined subtractively.

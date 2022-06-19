@@ -1,8 +1,9 @@
-import { addObject, setIsInvokingCommand } from './context'
-import { Command, LoopCommand, ParameterCommand, TriggerCommand } from './types/Command'
-import { Layer } from './types/Layer'
-import { Origin } from './types/Origin'
-import { Vector2 } from './types/Vector2'
+import { addObject, setIsInvokingCommand } from 'context'
+import { isValidAnimationLoopType, isValidLayer, isValidOrigin, isValidVector2 } from 'isValidParams'
+import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
+import { Layer } from 'types/Layer'
+import { Origin } from 'types/Origin'
+import { Vector2 } from 'types/Vector2'
 
 export type Animation = {
 	type: 'Animation'
@@ -43,7 +44,15 @@ export function createAnimation(
 	loopType: AnimationLoopType,
 	invokeFunction: () => void
 ) {
-	addObject({
+	if (typeof path !== 'string') throw new TypeError('Path must be a string.')
+	if (!isValidLayer(layer)) throw new TypeError(`${layer} is not a valid layer.`)
+	if (!isValidOrigin(origin)) throw new TypeError(`${origin} is not a valid origin.`)
+	if (!isValidVector2(initialPosition)) throw new TypeError('Initial position must be a Vector2.')
+	if (typeof frameCount !== 'number') throw new TypeError('Frame count must be a number.')
+	if (typeof frameDelay !== 'number') throw new TypeError('Frame delay must be a number.')
+	if (!isValidAnimationLoopType(loopType)) throw new TypeError(`${loopType} is not a valid loop type.`)
+
+	addObject<Animation>({
 		type: 'Animation',
 		path,
 		layer,

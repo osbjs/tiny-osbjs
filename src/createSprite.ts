@@ -1,4 +1,5 @@
 import { addObject, setIsInvokingCommand } from './context'
+import { isValidLayer, isValidOrigin, isValidVector2 } from './isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from './types/Command'
 import { Layer } from './types/Layer'
 import { Origin } from './types/Origin'
@@ -27,8 +28,11 @@ export type Sprite = {
  */
 export function createSprite(path: string, layer: Layer, origin: Origin, initialPosition: Vector2, invokeFunction: () => void) {
 	if (typeof path !== 'string') throw new TypeError('Path must be a string.')
+	if (!isValidLayer(layer)) throw new TypeError(`${layer} is not a valid layer.`)
+	if (!isValidOrigin(origin)) throw new TypeError(`${origin} is not a valid origin.`)
+	if (!isValidVector2(initialPosition)) throw new TypeError('Initial position must be a Vector2.')
 
-	addObject({
+	addObject<Sprite>({
 		type: 'Sprite',
 		path,
 		layer,

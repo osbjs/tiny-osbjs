@@ -1,4 +1,4 @@
-import { addObject } from './context'
+import { addObject } from 'context'
 
 export type Sample = {
 	type: 'Sample'
@@ -24,10 +24,12 @@ export enum SampleLayer {
  * @param volume Volume (1-100) of the sound file.
  */
 export function createSample(layer: SampleLayer, path: string, volume: number, startTime: number) {
-	if (![0, 1, 2, 3].includes(layer)) throw new TypeError('Use `SampleLayer` enum to specify layer instead.')
+	if (![0, 1, 2, 3].includes(layer)) throw new TypeError(`${layer} is not a valid sample layer. Use SampleLayer enum to specify layer instead.`)
+	if (typeof path !== 'string') throw new TypeError('Path must be a string.')
+	if (typeof volume !== 'number') throw new TypeError('Volume must be a number.')
 	if (volume < 1 || volume > 100) throw new Error('Volume must be between 1 and 100.')
 
-	addObject({
+	addObject<Sample>({
 		type: 'Sample',
 		layer,
 		path,

@@ -1,4 +1,4 @@
-import { Timestamp } from './types/Timestamp'
+import { Timestamp } from 'types/Timestamp'
 
 export function tryParseTimestamp(timestamp: number | Timestamp): number {
 	if (typeof timestamp == 'number') return timestamp

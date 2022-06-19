@@ -1,7 +1,7 @@
-import { addCommandToCurrentObject, setIsInvokingLoop } from 'src/context'
-import { tryParseTimestamp } from 'src/tryParseTimestamp'
-import { LoopCommand } from 'src/types/Command'
-import { Timestamp } from 'src/types/Timestamp'
+import { addCommandToCurrentObject, setIsInvokingLoop } from 'context'
+import { tryParseTimestamp } from 'tryParseTimestamp'
+import { LoopCommand } from 'types/Command'
+import { Timestamp } from 'types/Timestamp'
 
 /**
  * Create a loop group.

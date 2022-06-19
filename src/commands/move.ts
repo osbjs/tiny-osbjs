@@ -1,9 +1,9 @@
-import { addCommandToCurrentObject } from 'src/context'
-import { tryParseTimestamp } from 'src/tryParseTimestamp'
-import { Command } from 'src/types/Command'
-import { Easing } from 'src/types/Easing'
-import { Timestamp } from 'src/types/Timestamp'
-import { Vector2 } from 'src/types/Vector2'
+import { addCommandToCurrentObject } from 'context'
+import { tryParseTimestamp } from 'tryParseTimestamp'
+import { Command } from 'types/Command'
+import { Easing } from 'types/Easing'
+import { Timestamp } from 'types/Timestamp'
+import { Vector2 } from 'types/Vector2'
 
 /**
  * Change the location of the object in the play area.

@@ -1,7 +1,7 @@
-import { addCommandToCurrentObject, setIsInvokingTrigger } from 'src/context'
-import { tryParseTimestamp } from 'src/tryParseTimestamp'
-import { TriggerCommand, TriggerType } from 'src/types/Command'
-import { Timestamp } from 'src/types/Timestamp'
+import { addCommandToCurrentObject, setIsInvokingTrigger } from 'context'
+import { tryParseTimestamp } from 'tryParseTimestamp'
+import { TriggerCommand, TriggerType } from 'types/Command'
+import { Timestamp } from 'types/Timestamp'
 
 /**
  * Create a trigger group.

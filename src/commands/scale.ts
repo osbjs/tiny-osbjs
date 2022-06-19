@@ -1,8 +1,8 @@
-import { addCommandToCurrentObject } from 'src/context'
-import { tryParseTimestamp } from 'src/tryParseTimestamp'
-import { Command } from 'src/types/Command'
-import { Easing } from 'src/types/Easing'
-import { Timestamp } from 'src/types/Timestamp'
+import { addCommandToCurrentObject } from 'context'
+import { tryParseTimestamp } from 'tryParseTimestamp'
+import { Command } from 'types/Command'
+import { Easing } from 'types/Easing'
+import { Timestamp } from 'types/Timestamp'
 
 /**
  * Change the size of the object relative to its original size.
