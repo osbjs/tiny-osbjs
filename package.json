@@ -1,7 +1,7 @@
 {
 	"name": "@osbjs/tiny-osbjs",
 	"version": "1.0.0",
-	"description": "a minimalistic osu! storyuboard library",
+	"description": "a declarative osu! storyboard library",
 	"main": "dist/cjs/index.js",
 	"module": "dist/es/index.js",
 	"scripts": {
