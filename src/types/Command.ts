@@ -1,5 +1,5 @@
-import { Easing } from './Easing'
 import { Color } from './Color'
+import { Easing } from './Easing'
 import { Vector2 } from './Vector2'
 
 export type Command = {
@@ -15,7 +15,7 @@ export type Command = {
 export type CommandType = 'F' | 'M' | 'MX' | 'MY' | 'S' | 'V' | 'R' | 'C'
 
 export type ParameterCommand = {
-	__name__: "Parameter"
+	__name__: 'Parameter'
 	type: 'P'
 	easing: Easing
 	startTime: number
@@ -31,7 +31,7 @@ export enum Parameter {
 }
 
 export type LoopCommand = {
-	__name__: "Loop"
+	__name__: 'Loop'
 	type: 'L'
 	startTime: number
 	count: number
@@ -39,9 +39,9 @@ export type LoopCommand = {
 }
 
 export type TriggerCommand = {
-	__name__: "Trigger"
+	__name__: 'Trigger'
 	type: 'T'
-	triggerName: TriggerType
+	triggerType: TriggerType
 	startTime: number
 	endTime: number
 	commands: (Command | ParameterCommand)[]

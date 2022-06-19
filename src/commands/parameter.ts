@@ -1,4 +1,5 @@
 import { addCommandToCurrentObject } from 'context'
+import { isValidEasing, isValidParameter } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Parameter, ParameterCommand } from 'types/Command'
 import { Easing } from 'types/Easing'
@@ -14,6 +15,9 @@ import { Easing } from 'types/Easing'
  * @param parameter `Parameter` to apply.
  */
 export function parameter(startTime: number, endTime: number, parameter: Parameter, easing: Easing) {
+	if (!isValidParameter(parameter)) throw new TypeError(parameter + ' is not a valid parameter. Use `Parameter` enum instead')
+	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
+
 	addCommandToCurrentObject<ParameterCommand>({
 		__name__: 'Parameter',
 		type: 'P',

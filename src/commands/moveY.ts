@@ -1,4 +1,5 @@
 import { addCommandToCurrentObject } from 'context'
+import { isValidEasing } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
@@ -14,6 +15,8 @@ import { Timestamp } from 'types/Timestamp'
  * @param easing How the command should "accelerate".
  */
 export function moveY(startTime: number | Timestamp, endTime: number | Timestamp, startY: number, endY: number, easing: Easing = Easing.Linear) {
+	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
+
 	addCommandToCurrentObject<Command>({
 		__name__: 'MoveX',
 		type: 'MY',
@@ -32,6 +35,8 @@ export function moveY(startTime: number | Timestamp, endTime: number | Timestamp
  * @param y Y coordinate at the given time.
  */
 export function moveYAtTime(time: number | Timestamp, y: number) {
+	if (typeof y != 'number') throw new TypeError('y must be number.')
+
 	addCommandToCurrentObject<Command>({
 		__name__: 'MoveX',
 		type: 'MY',

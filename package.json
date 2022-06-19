@@ -5,6 +5,7 @@
 	"main": "dist/cjs/index.js",
 	"module": "dist/es/index.js",
 	"scripts": {
+		"clean": "prettier --write src/",
 		"build": "rollup -c",
 		"prepare": "npm run build",
 		"test": "jest"
@@ -19,6 +20,8 @@
 	"devDependencies": {
 		"@types/jest": "^28.1.2",
 		"jest": "^28.1.1",
+		"prettier": "^2.7.1",
+		"prettier-plugin-organize-imports": "^3.0.0",
 		"rollup": "^2.75.6",
 		"rollup-plugin-ts": "^3.0.2",
 		"ts-jest": "^28.0.5",

@@ -1,4 +1,5 @@
-import { addObject, setIsInvokingCommand } from 'context'
+import { addObject, getObjects, setIsInvokingCommand } from 'context'
+import { Sprite } from 'createSprite'
 import { isValidAnimationLoopType, isValidLayer, isValidOrigin, isValidVector2 } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 import { Layer } from 'types/Layer'
@@ -66,4 +67,12 @@ export function createAnimation(
 	setIsInvokingCommand(true)
 	invokeFunction()
 	setIsInvokingCommand(false)
+
+	if (isAnimationEmpty()) console.warn('The animation is empty.')
+}
+
+function isAnimationEmpty(): boolean {
+	const currentSprite = getObjects()[getObjects().length - 1] as Sprite
+
+	return currentSprite.commands.length === 0
 }

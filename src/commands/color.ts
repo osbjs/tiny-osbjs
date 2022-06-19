@@ -1,4 +1,5 @@
 import { addCommandToCurrentObject } from 'context'
+import { isValidEasing } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Color } from 'types/Color'
 import { Command } from 'types/Command'
@@ -25,6 +26,8 @@ export function color(
 	endColor: Color,
 	easing: Easing = Easing.Linear
 ) {
+	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
+
 	addCommandToCurrentObject<Command>({
 		__name__: 'Color',
 		type: 'C',

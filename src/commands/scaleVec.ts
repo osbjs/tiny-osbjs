@@ -1,4 +1,5 @@
 import { addCommandToCurrentObject } from 'context'
+import { isValidEasing } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
@@ -21,6 +22,8 @@ export function scaleVec(
 	endScale: Vector2,
 	easing: Easing = Easing.Linear
 ) {
+	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
+
 	addCommandToCurrentObject<Command>({
 		__name__: 'Scale',
 		type: 'V',

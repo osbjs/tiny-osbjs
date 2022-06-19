@@ -1,4 +1,4 @@
-import { Command, ParameterCommand, LoopCommand, TriggerCommand } from 'types/Command'
+import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 
 export function isCommand(c: Command | ParameterCommand | LoopCommand | TriggerCommand): c is Command {
 	return ['F', 'M', 'MX', 'MY', 'S', 'V', 'R', 'C'].includes(c.type)

@@ -1,11 +1,11 @@
-import { isSprite, isAnimation, isSample, isBackground, isVideo } from 'checkObjectType'
+import { isAnimation, isBackground, isSample, isSprite, isVideo } from 'checkObjectType'
 import { getObjects } from 'context'
 import { Animation } from 'createAnimation'
 import { Background } from 'createBackground'
 import { Sample } from 'createSample'
 import { Sprite } from 'createSprite'
 import { Video } from 'createVideo'
-import { getBackgroundOsb, getVideoOsb, getSpriteOsb, getAnimationOsb, getSampleOsb } from 'getObjectOsb'
+import { getAnimationOsb, getBackgroundOsb, getSampleOsb, getSpriteOsb, getVideoOsb } from 'getObjectOsb'
 
 /**
  * Generate osb string that can be used to create osb file or replace [Events] section in osu file.
