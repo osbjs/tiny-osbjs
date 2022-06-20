@@ -60,6 +60,15 @@ createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
 })
 ```
 
+You can pass osu timestamp to the start time/end time of the command and the library will try to parse it.
+```javascript
+const { createSprite, fade, loop } = require('tiny-osbjs')
+
+createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
+	fade(0, "00:00:015", 0, 1) // this works
+})
+```
+
 Finally, you can generate osb string of the storyboard. You can use that string to export to osb file.
 ```javascript
 const { generateStoryboardOsb } = require('tiny-osbjs')
@@ -130,7 +139,13 @@ Create a new Animation. All commands must be called inside the invoke function.
 ```typescript
 function generateStoryboardOsb(): string
 ```
-Generate osb string that can be used to create osb file or replace `[Events]` section in osu file.
+Generate string that can be used to create .osb file.
+
+### replaceOsuEvents
+```typescript
+function replaceOsuEvents(parsedOsuDifficulty: string): string
+```
+Returns .osu file after replacing \[Events\] section with events generated from storyboard.
 
 ### getReportForOverlappingCommands
 ```typescript
@@ -138,54 +153,109 @@ function getReportForOverlappingCommands()
 ```
 Get a report for each object that has overlapping commands.
 
-### Commands
+### fade
 ```typescript
-function fade(startTime: number | Timestamp, endTime: number | Timestamp, startOpacity: number, endOpacity: number, easing: Easing = Easing.Linear)
-function fadeAtTime(time: number, opacity: number)
+function fade(
+	startTime: number | Timestamp,
+	endTime: number | Timestamp,
+	startOpacity: number, 
+	endOpacity: number, 
+	easing: Easing = Easing.Linear
+)
+function fadeAtTime(time: number, opacity: number) // shorthand
 ```
 Change the opacity of the object.
 
+### move
 ```typescript
-function move(startTime: number | Timestamp, endTime: number | Timestamp, startPosition: Vector2, endPosition: Vector2, easing: Easing = Easing.Linear)
+function move(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	startPosition: Vector2, 
+	endPosition: Vector2, 
+	easing: Easing = Easing.Linear
+)
 function moveAtTime(time: number, position: Vector2)
 ```
 Change the location of the object in the play area.
 
+### moveX
 ```typescript
-function moveX(startTime: number | Timestamp, endTime: number | Timestamp, startX: number, endX: number, easing: Easing = Easing.Linear)
+function moveX(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	startX: number, 
+	endX: number, 
+	easing: Easing = Easing.Linear
+)
 function moveXAtTime(time: number, x: number)
 ```
 Change the x coordinate of the object.
 
+### moveY
 ```typescript
-function moveY(startTime: number | Timestamp, endTime: number | Timestamp, startY: number, endY: number, easing: Easing = Easing.Linear)
+function moveY(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	startY: number, 
+	endY: number, 
+	easing: Easing = Easing.Linear
+)
 function moveYAtTime(time: number, y: number)
 ```
 Change the y coordinate of the object.
 
+### rotate
 ```typescript
-function rotate(startTime: number | Timestamp, endTime: number | Timestamp, startAngle: number, endAngle: number, easing: Easing = Easing.Linear)
+function rotate(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	startAngle: number, 
+	endAngle: number, 
+	easing: Easing = Easing.Linear
+)
 function rotateAtTime(time: number, angle: number)
 ```
 Change the rotation of the object.
 
+### scale
 ```typescript
-function scale(startTime: number | Timestamp, endTime: number | Timestamp, startScale: Vector2, endScale: Vector2, easing: Easing = Easing.Linear)
+function scale(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	startScale: Vector2, 
+	endScale: Vector2, 
+	easing: Easing = Easing.Linear
+)
 function scaleAtTime(time: number, scale: Vector2)
 ```
 Change the scale of the object.
 
+### color
 ```typescript
-function color(startTime: number | Timestamp, endTime: number | Timestamp, startColor: Color, endColor: Color, easing: Easing = Easing.Linear)
+function color(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	startColor: Color, 
+	endColor: Color, 
+	easing: Easing = Easing.Linear
+)
 function colorAtTime(time: number, color: Color)
 ```
 The virtual light source colour on the object. The colours of the pixels on the object are determined subtractively.
 
+### parameter
 ```typescript
-function parameter(startTime: number | Timestamp, endTime: number | Timestamp, parameter: Parameter, easing: Easing)
+function parameter(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	parameter: Parameter, 
+	easing: Easing
+)
 ```
 Unlike the other commands, which can be seen as setting endpoints along continually-tracked values, the `parameter` command apply ONLY while they are active, i.e.,you can't put a command from timestamps 1000 to 2000 and expect the value to apply at time 3000, even if the object's other commands aren't finished by that point.
 
+### loop
 ```typescript
 function loop(startTime: number | Timestamp, count: number, invokeFunction: () => void)
 ```
@@ -193,8 +263,14 @@ Create a loop group.
 
 Loops can be defined to repeat a set of events constantly for a set number of iterations. Note that events inside a loop should be timed with a zero-base. This means that you should start from 0ms for the inner event's timing and work up from there. The loop event's start time will be added to this value at game runtime.
 
+### trigger
 ```typescript
-function trigger(triggerType: TriggerType, startTime: number | Timestamp, endTime: number | Timestamp, invokeFunction: () => void)
+function trigger(
+	triggerType: TriggerType, 
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
+	invokeFunction: () => void
+)
 ```
 Create a trigger group.
 

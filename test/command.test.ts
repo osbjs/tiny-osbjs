@@ -147,9 +147,9 @@ describe('command', () => {
 					'  S,0,2000,,3\n' +
 					'  V,0,0,1000,1,1,100,100\n' +
 					'  V,0,2000,,200,200\n' +
-					'//Storyboard Layer 1 (Foreground)\n' +
-					'//Storyboard Layer 2 (Fail)\n' +
-					'//Storyboard Layer 3 (Pass)\n' +
+					'//Storyboard Layer 1 (Fail)\n' +
+					'//Storyboard Layer 2 (Pass)\n' +
+					'//Storyboard Layer 3 (Foreground)\n' +
 					'//Storyboard Layer 4 (Overlay)\n' +
 					'//Storyboard Sound Samples\n'
 			)
@@ -175,9 +175,9 @@ describe('command', () => {
 				'Sprite,Background,Centre,"test.png",320,240\n' +
 				' F,0,0,1000,0,1\n' +
 				' M,0,0,1000,0,0,100,100\n' +
-				'//Storyboard Layer 1 (Foreground)\n' +
-				'//Storyboard Layer 2 (Fail)\n' +
-				'//Storyboard Layer 3 (Pass)\n' +
+				'//Storyboard Layer 1 (Fail)\n' +
+				'//Storyboard Layer 2 (Pass)\n' +
+				'//Storyboard Layer 3 (Foreground)\n' +
 				'//Storyboard Layer 4 (Overlay)\n' +
 				'//Storyboard Sound Samples\n'
 		)
