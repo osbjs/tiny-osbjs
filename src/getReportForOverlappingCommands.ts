@@ -1,9 +1,9 @@
-import { isCommand, isParameterCommand, isLoopCommand, isTriggerCommand } from 'checkCommandType'
-import { isSprite, isAnimation } from 'checkObjectType'
+import { isCommand, isLoopCommand, isParameterCommand, isTriggerCommand } from 'checkCommandType'
+import { isAnimation, isSprite } from 'checkObjectType'
 import { getObjects } from 'context'
 import { Animation } from 'createAnimation'
 import { Sprite } from 'createSprite'
-import { Command, ParameterCommand, CommandType, LoopCommand, TriggerCommand } from 'types/Command'
+import { Command, CommandType, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 
 /**
  * Get a report for each object that has overlapping commands.
@@ -17,28 +17,26 @@ export function getReportForOverlappingCommands() {
 			(command): command is Command | ParameterCommand => isCommand(command) || isParameterCommand(command)
 		)
 
-		hasOverlap = !(['F', 'M', 'MX', 'MY', 'S', 'V', 'R', 'C', 'P'] as (CommandType | 'P')[]).every(
-			(type) => !hasOverlappingCommands(nonLoopCommand, type)
+		hasOverlap = (['F', 'M', 'MX', 'MY', 'S', 'V', 'R', 'C', 'P'] as (CommandType | 'P')[]).some((type) =>
+			hasOverlappingCommands(nonLoopCommand, type)
 		)
 
 		if (hasOverlap) {
 			console.warn(`${object.type} "${object.path}" has overlapping commands.`)
-			return true
+			return
 		}
 
 		const loopAndTriggerCommands = object.commands.filter(
 			(command): command is LoopCommand | TriggerCommand => isLoopCommand(command) || isTriggerCommand(command)
 		)
 
-		hasOverlap = !loopAndTriggerCommands.every((command) => {
-			return !(['F', 'M', 'MX', 'MY', 'S', 'V', 'R', 'C', 'P'] as (CommandType | 'P')[]).every(
-				(type) => !hasOverlappingCommands(command.commands, type)
-			)
-		})
+		hasOverlap = loopAndTriggerCommands.some((command) =>
+			(['F', 'M', 'MX', 'MY', 'S', 'V', 'R', 'C', 'P'] as (CommandType | 'P')[]).some((type) => hasOverlappingCommands(command.commands, type))
+		)
 
 		if (hasOverlap) {
 			console.warn(`${object.type} "${object.path}" has overlapping commands.`)
-			return true
+			return
 		}
 	})
 }
@@ -53,8 +51,8 @@ export function hasOverlappingCommands(commands: (Command | ParameterCommand | L
 				const toBeComparedCommand = filteredCommands[j]
 
 				if (
-					(toBeComparedCommand.startTime >= currentCommand.startTime && toBeComparedCommand.startTime <= currentCommand.endTime) ||
-					(toBeComparedCommand.endTime >= currentCommand.startTime && toBeComparedCommand.endTime <= currentCommand.endTime)
+					(toBeComparedCommand.startTime > currentCommand.startTime && toBeComparedCommand.startTime < currentCommand.endTime) ||
+					(toBeComparedCommand.endTime < currentCommand.startTime && toBeComparedCommand.endTime > currentCommand.endTime)
 				)
 					return true
 			}
