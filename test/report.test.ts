@@ -1,6 +1,5 @@
 import { fade, loop } from 'commands'
 import { createContext, useContext } from 'context'
-import { createAnimation } from 'createAnimation'
 import { createSprite } from 'createSprite'
 import { getReportForOverlappingCommands } from 'getReportForOverlappingCommands'
 

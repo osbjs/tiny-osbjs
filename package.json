@@ -5,10 +5,10 @@
 	"main": "dist/cjs/index.js",
 	"module": "dist/es/index.js",
 	"scripts": {
-		"format": "prettier --write src/",
+		"format": "prettier --write \"{src,test}/**/*.ts\"",
 		"build": "rollup -c",
 		"test": "jest",
-		"prepublishOnly": "npm run format && npm run build && npm test"
+		"prepublishOnly": "npm run build && npm test"
 	},
 	"types": "dist/types/index.d.ts",
 	"keywords": [
