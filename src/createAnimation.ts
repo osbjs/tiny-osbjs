@@ -68,7 +68,7 @@ export function createAnimation(
 	invokeFunction()
 	setIsInvokingCommand(false)
 
-	if (isAnimationEmpty()) console.warn('The animation is empty.')
+	if (isAnimationEmpty()) console.warn('An animation was left `empty`. Specify at least one command to disable this warning.')
 }
 
 function isAnimationEmpty(): boolean {

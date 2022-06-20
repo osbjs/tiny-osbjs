@@ -1,5 +1,5 @@
 import { color } from 'commands'
-import { Context, useContext } from 'context'
+import { Context, createContext, useContext } from 'context'
 import { createSprite } from 'createSprite'
 
 describe('context', () => {
@@ -15,5 +15,15 @@ describe('context', () => {
 				color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
 			})
 		}).toThrowError(`Context has not been set.`)
+	})
+
+	it('should throw error when called called `useContext` inside an invoke function', () => {
+		expect(() => {
+			useContext(createContext())
+
+			createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
+				useContext(createContext())
+			})
+		}).toThrowError(`You can't set the context inside an invoke function.`)
 	})
 })

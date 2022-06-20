@@ -42,6 +42,12 @@ export function useContext(context: Context): void {
 	)
 		throw new TypeError('You must use the context returned from `createContext()`.')
 
+	const isInvokingCommand =
+		STORYBOARD_CONTEXT != null &&
+		(STORYBOARD_CONTEXT.isInvokingCommand || STORYBOARD_CONTEXT.isInvokingLoop || STORYBOARD_CONTEXT.isInvokingTrigger)
+
+	if (isInvokingCommand) throw new Error("You can't set the context inside an invoke function.")
+
 	STORYBOARD_CONTEXT = context
 }
 
@@ -62,7 +68,7 @@ export function addObject<T extends Sprite | Animation | Sample | Video | Backgr
 export function addCommandToCurrentObject<T extends Command | ParameterCommand | LoopCommand | TriggerCommand>(command: T) {
 	const currentObject = getObjects()[getObjects().length - 1]
 
-	if (!getContext().isInvokingCommand || (!isSprite(currentObject) && !isAnimation(currentObject)))
+	if (!getObjects().length || !getContext().isInvokingCommand || (!isSprite(currentObject) && !isAnimation(currentObject)))
 		throw new Error(`${command.__name__} command must be called inside an invoke function.`)
 
 	if (getContext().isInvokingLoop) {

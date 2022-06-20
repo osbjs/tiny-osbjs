@@ -44,7 +44,7 @@ export function createSprite(path: string, layer: Layer, origin: Origin, initial
 	invokeFunction()
 	setIsInvokingCommand(false)
 
-	if (isSpriteEmpty()) console.warn('The sprite is empty.')
+	if (isSpriteEmpty()) console.warn('A sprite was left `empty`. Specify at least one command to disable this warning.')
 }
 
 function isSpriteEmpty(): boolean {
