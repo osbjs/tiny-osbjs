@@ -104,7 +104,12 @@ Create a new Video. You should only use this if you are generating a storyboard 
 
 ### createSample
 ```typescript
-function createSample(startTime: number, layer: SampleLayer, path: AudioPath, volume: number)
+function createSample(
+	startTime: number,
+	layer: SampleLayer,
+	path: AudioPath,
+	volume: number
+)
 ```
 Create a new Sample.
 
