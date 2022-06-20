@@ -56,7 +56,7 @@ describe('create object', () => {
 		createSprite('test-sprite4.png', 'Overlay', 'Centre', { x: 320, y: 240 }, () => {})
 		createAnimation('test-animation4.png', 'Overlay', 'Centre', { x: 320, y: 240 }, 3, 300, 'LoopForever', () => {})
 
-		createSample(SampleLayer.Background, 'test-sample.ogg', 100, 1000)
+		createSample(1000, SampleLayer.Background, 'test-sample.ogg', 100)
 
 		expect(generateStoryboardOsb()).toBe(
 			'[Events]\n' +

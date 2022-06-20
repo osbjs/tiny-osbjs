@@ -125,7 +125,7 @@ Sample,1000,0,"test-sample.ogg",100
 		fade(0, 1000, 0, 1)
 	})
 
-	createSample(SampleLayer.Background, 'test-sample.ogg', 100, 1000)
+	createSample(1000, SampleLayer.Background, 'test-sample.ogg', 100)
 
 	expect(replaceOsuEvents(parsedOsuDifficulty)).toBe(expectedReplacedOsuDifficulty)
 })

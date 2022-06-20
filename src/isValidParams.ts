@@ -1,4 +1,5 @@
 import { AnimationLoopType } from 'createAnimation'
+import { AudioPath } from 'types/AudioPath'
 import { Color } from 'types/Color'
 import { Parameter, TriggerType } from 'types/Command'
 import { Easing } from 'types/Easing'
@@ -36,4 +37,8 @@ export function isValidEasing(easing: number): easing is Easing {
 
 export function isValidTriggerType(triggerType: string): triggerType is TriggerType {
 	return /HitSound(All|Normal|Soft|Drum)?(All|Normal|Soft|Drum)?(Whistle|Finish|Clap)?\d*/.test(triggerType)
+}
+
+export function isValidAudioType(audioType: string): audioType is AudioPath {
+	return /.+\.mp3|.+\.ogg|.+\.wav/.test(audioType)
 }
