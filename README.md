@@ -1,5 +1,5 @@
 # tiny-osbjs
-a declarative osu! storyboard library with zero-dependency and zero-configuration.
+A declarative osu! storyboard library with zero dependencies and zero configurations.
 
 If you need more features like texture generator, please consider using [osbjs](https://osbjs.vercel.app).
 
