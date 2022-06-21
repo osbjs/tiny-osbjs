@@ -35,6 +35,8 @@ export function createContext(): Context {
  */
 export function useContext(context: Context): void {
 	if (
+		!context ||
+		typeof context !== 'object' ||
 		!Array.isArray(context.objects) ||
 		typeof context.isInvokingCommand !== 'boolean' ||
 		typeof context.isInvokingLoop !== 'boolean' ||
