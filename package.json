@@ -33,8 +33,5 @@
 	"exports": {
 		"require": "./dist/cjs/index.js",
 		"import": "./dist/es/index.js"
-	},
-	"dependencies": {
-		"tslib": "^2.4.0"
 	}
 }
