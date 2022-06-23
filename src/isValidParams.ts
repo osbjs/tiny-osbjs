@@ -47,10 +47,10 @@ export function isValidAudioType(audioType: string): audioType is AudioPath {
 export function isValidContext(context: Context): context is Context {
 	return (
 		typeof context == 'object' &&
-		!Array.isArray(context.objects) &&
-		typeof context.isInvokingCommand !== 'boolean' &&
-		typeof context.isInvokingLoop !== 'boolean' &&
-		typeof context.isInvokingTrigger !== 'boolean' &&
-		typeof context.warnsEmptyObjects !== 'boolean'
+		Array.isArray(context.objects) &&
+		typeof context.isInvokingCommand == 'boolean' &&
+		typeof context.isInvokingLoop == 'boolean' &&
+		typeof context.isInvokingTrigger == 'boolean' &&
+		typeof context.warnsEmptyObjects == 'boolean'
 	)
 }
