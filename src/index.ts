@@ -1,5 +1,5 @@
 export * from 'commands'
-export { Context, createContext, useContext } from 'context'
+export { Context, createContext, useContext, warnsEmptyObjects } from 'context'
 export { createAnimation } from 'createAnimation'
 export { createBackground } from 'createBackground'
 export { createSample } from 'createSample'

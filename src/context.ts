@@ -5,6 +5,7 @@ import { Background } from 'createBackground'
 import { Sample } from 'createSample'
 import { Sprite } from 'createSprite'
 import { Video } from 'createVideo'
+import { isValidContext } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 
 export type Context = {
@@ -12,6 +13,7 @@ export type Context = {
 	isInvokingCommand: boolean
 	isInvokingLoop: boolean
 	isInvokingTrigger: boolean
+	warnsEmptyObjects: boolean
 }
 
 let STORYBOARD_CONTEXT: Context | null = null
@@ -26,6 +28,7 @@ export function createContext(): Context {
 		isInvokingCommand: false,
 		isInvokingLoop: false,
 		isInvokingTrigger: false,
+		warnsEmptyObjects: false,
 	}
 }
 
@@ -34,15 +37,7 @@ export function createContext(): Context {
  * @param context Context
  */
 export function useContext(context: Context): void {
-	if (
-		!context ||
-		typeof context !== 'object' ||
-		!Array.isArray(context.objects) ||
-		typeof context.isInvokingCommand !== 'boolean' ||
-		typeof context.isInvokingLoop !== 'boolean' ||
-		typeof context.isInvokingTrigger !== 'boolean'
-	)
-		throw new TypeError('You must use the context returned from `createContext()`.')
+	if (!context || !isValidContext(context)) throw new TypeError('You must use the context returned from `createContext()`.')
 
 	const isInvokingCommand =
 		STORYBOARD_CONTEXT != null &&
@@ -104,4 +99,15 @@ export function setIsInvokingLoop(value: boolean) {
 
 export function setIsInvokingTrigger(value: boolean) {
 	getContext().isInvokingTrigger = value
+}
+
+/**
+ * Warns empty sprite & animation objects.
+ */
+export function warnsEmptyObjects() {
+	getContext().warnsEmptyObjects = true
+}
+
+export function doesWarnEmptyObject() {
+	return getContext().warnsEmptyObjects
 }

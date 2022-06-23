@@ -1,4 +1,4 @@
-import { addObject, getObjects, setIsInvokingCommand } from './context'
+import { addObject, doesWarnEmptyObject, getObjects, setIsInvokingCommand } from './context'
 import { isValidLayer, isValidOrigin, isValidVector2 } from './isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from './types/Command'
 import { Layer } from './types/Layer'
@@ -44,7 +44,7 @@ export function createSprite(path: string, layer: Layer, origin: Origin, initial
 	invokeFunction()
 	setIsInvokingCommand(false)
 
-	if (isSpriteEmpty()) console.warn('A sprite was left `empty`. Specify at least one command to disable this warning.')
+	if (isSpriteEmpty() && doesWarnEmptyObject()) console.warn('A sprite was left `empty`. Specify at least one command to disable this warning.')
 }
 
 function isSpriteEmpty(): boolean {

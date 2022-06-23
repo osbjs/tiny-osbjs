@@ -1,4 +1,4 @@
-import { addObject, getObjects, setIsInvokingCommand } from 'context'
+import { addObject, doesWarnEmptyObject, getObjects, setIsInvokingCommand } from 'context'
 import { Sprite } from 'createSprite'
 import { isValidAnimationLoopType, isValidLayer, isValidOrigin, isValidVector2 } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
@@ -68,7 +68,8 @@ export function createAnimation(
 	invokeFunction()
 	setIsInvokingCommand(false)
 
-	if (isAnimationEmpty()) console.warn('An animation was left `empty`. Specify at least one command to disable this warning.')
+	if (isAnimationEmpty() && doesWarnEmptyObject())
+		console.warn('An animation was left `empty`. Specify at least one command to disable this warning.')
 }
 
 function isAnimationEmpty(): boolean {

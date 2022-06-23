@@ -1,3 +1,4 @@
+import { Context } from 'context'
 import { AnimationLoopType } from 'createAnimation'
 import { AudioPath } from 'types/AudioPath'
 import { Color } from 'types/Color'
@@ -41,4 +42,15 @@ export function isValidTriggerType(triggerType: string): triggerType is TriggerT
 
 export function isValidAudioType(audioType: string): audioType is AudioPath {
 	return /.+\.mp3|.+\.ogg|.+\.wav/.test(audioType)
+}
+
+export function isValidContext(context: Context): context is Context {
+	return (
+		typeof context == 'object' &&
+		!Array.isArray(context.objects) &&
+		typeof context.isInvokingCommand !== 'boolean' &&
+		typeof context.isInvokingLoop !== 'boolean' &&
+		typeof context.isInvokingTrigger !== 'boolean' &&
+		typeof context.warnsEmptyObjects !== 'boolean'
+	)
 }
