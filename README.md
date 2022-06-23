@@ -1,7 +1,7 @@
 # tiny-osbjs
 A declarative osu! storyboard library with zero dependencies and zero configurations.
 
-If you need more features like texture generator, please consider using [osbjs](https://osbjs.vercel.app).
+If you need more features, please consider using [osbjs](https://osbjs.vercel.app).
 
 ## Install
 ```bash
@@ -11,7 +11,7 @@ npm install @osbjs/tiny-osbjs
 ## Usage
 Before you do anything, you have to create a storyboard context and tell the library to use it. This context is shared accross the whole project. 
 ```javascript
-const { createContext, useContext } = require('tiny-osbjs')
+const { createContext, useContext } = require('@osbjs/tiny-osbjs')
 
 const context = createContext()
 useContext(context)
@@ -27,7 +27,7 @@ createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {})
 If you want to create a storyboard for each difficulty, you must specify the context at the entry point of each storyboard.
 ```javascript
 // difficulty1.js
-const { createContext, useContext } = require('tiny-osbjs')
+const { createContext, useContext } = require('@osbjs/tiny-osbjs')
 
 function difficulty1Storyboard() {
 	const context = createContext()
@@ -49,7 +49,7 @@ difficulty2Storyboard()
 
 The killer-feature of `tiny-osb` is that you can specify the commands in a declarative way and the library will know which objects they are refering to.
 ```javascript
-const { createSprite, fade, loop } = require('tiny-osbjs')
+const { createSprite, fade, loop } = require('@osbjs/tiny-osbjs')
 
 createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
 	fade(0, 1000, 0, 1) // refers to sprite
@@ -62,7 +62,7 @@ createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
 
 You can pass osu timestamp to the start time/end time of the command and the library will try to parse it.
 ```javascript
-const { createSprite, fade, loop } = require('tiny-osbjs')
+const { createSprite, fade, loop } = require('@osbjs/tiny-osbjs')
 
 createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
 	fade(0, "00:00:015", 0, 1) // this works
@@ -71,10 +71,10 @@ createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
 
 Finally, you can generate osb string of the storyboard. You can use that string to export to osb file.
 ```javascript
-const { generateStoryboardOsb } = require('tiny-osbjs')
+const { generateStoryboardOsb } = require('@osbjs/tiny-osbjs')
 
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
-```
+``` 
 
 ## API documentation
 
