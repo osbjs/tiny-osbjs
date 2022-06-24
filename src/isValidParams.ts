@@ -13,7 +13,7 @@ export function isValidLayer(layer: string): layer is Layer {
 }
 
 export function isValidOrigin(origin: string): origin is Origin {
-	return ['TopLeft', 'TopCentre', 'TopRight', 'CenterLeft', 'Centre', 'CentreRight', 'BottomLeft', 'BottomCentre', 'BottomRight'].includes(origin)
+	return ['TopLeft', 'TopCentre', 'TopRight', 'CentreLeft', 'Centre', 'CentreRight', 'BottomLeft', 'BottomCentre', 'BottomRight'].includes(origin)
 }
 
 export function isValidVector2(vector: Vector2): vector is Vector2 {
