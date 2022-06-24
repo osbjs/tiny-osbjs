@@ -255,7 +255,7 @@ function parameter(
 	startTime: number | Timestamp, 
 	endTime: number | Timestamp, 
 	parameter: Parameter, 
-	easing: Easing
+	easing: Easing = Easing.Linear
 )
 ```
 Unlike the other commands, which can be seen as setting endpoints along continually-tracked values, the `parameter` command apply ONLY while they are active, i.e.,you can't put a command from timestamps 1000 to 2000 and expect the value to apply at time 3000, even if the object's other commands aren't finished by that point.

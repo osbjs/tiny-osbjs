@@ -14,7 +14,7 @@ import { Easing } from 'types/Easing'
  * @param endTime Time in milliseconds/timestamp indicate when the event will end.
  * @param parameter `Parameter` to apply.
  */
-export function parameter(startTime: number, endTime: number, parameter: Parameter, easing: Easing) {
+export function parameter(startTime: number, endTime: number, parameter: Parameter, easing: Easing = Easing.Linear) {
 	if (!isValidParameter(parameter)) throw new TypeError(parameter + ' is not a valid parameter. Use `Parameter` enum instead')
 	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
 
