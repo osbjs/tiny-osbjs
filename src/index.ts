@@ -16,4 +16,4 @@ export * from 'types/Origin'
 export * from 'types/Timestamp'
 export * from 'types/Vector2'
 export * from 'utils/angle'
-
+export * from 'utils/random'
