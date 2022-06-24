@@ -1,4 +1,4 @@
-import { addObject, doesWarnEmptyObject, getObjects, setIsInvokingCommand } from './context'
+import { addObject, doesWarnEmptyObject, getObjects, isInvokingCommand, isInvokingLoop, isInvokingTrigger, setIsInvokingCommand } from './context'
 import { isValidLayer, isValidOrigin, isValidVector2 } from './isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from './types/Command'
 import { Layer } from './types/Layer'
@@ -31,6 +31,8 @@ export function createSprite(path: string, layer: Layer, origin: Origin, initial
 	if (!isValidLayer(layer)) throw new TypeError(`${layer} is not a valid layer.`)
 	if (!isValidOrigin(origin)) throw new TypeError(`${origin} is not a valid origin.`)
 	if (!isValidVector2(initialPosition)) throw new TypeError('Initial position must be a Vector2.')
+	if (isInvokingCommand() || isInvokingLoop() || isInvokingTrigger())
+		throw new Error("Do not call `createSprite` inside an invoke function of other `createSprite` or `createAnimation`'s method")
 
 	addObject<Sprite>({
 		type: 'Sprite',

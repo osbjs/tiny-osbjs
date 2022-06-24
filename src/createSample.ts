@@ -1,4 +1,4 @@
-import { addObject } from 'context'
+import { addObject, isInvokingCommand, isInvokingLoop, isInvokingTrigger } from 'context'
 import { AudioPath } from 'types/AudioPath'
 
 export type Sample = {
@@ -29,6 +29,8 @@ export function createSample(startTime: number, layer: SampleLayer, path: AudioP
 	if (typeof path !== 'string') throw new TypeError('Path must be a string.')
 	if (typeof volume !== 'number') throw new TypeError('Volume must be a number.')
 	if (volume < 1 || volume > 100) throw new Error('Volume must be between 1 and 100.')
+	if (isInvokingCommand() || isInvokingLoop() || isInvokingTrigger())
+	throw new Error("Do not call `createSample` inside an invoke function of other `createSprite` or `createAnimation`'s method")
 
 	addObject<Sample>({
 		type: 'Sample',

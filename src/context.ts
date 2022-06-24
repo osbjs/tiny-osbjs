@@ -93,12 +93,24 @@ export function setIsInvokingCommand(value: boolean) {
 	getContext().isInvokingCommand = value
 }
 
+export function isInvokingCommand() {
+	return getContext().isInvokingCommand
+}
+
 export function setIsInvokingLoop(value: boolean) {
 	getContext().isInvokingLoop = value
 }
 
+export function isInvokingLoop() {
+	return getContext().isInvokingLoop
+}
+
 export function setIsInvokingTrigger(value: boolean) {
 	getContext().isInvokingTrigger = value
+}
+
+export function isInvokingTrigger() {
+	return getContext().isInvokingTrigger
 }
 
 /**

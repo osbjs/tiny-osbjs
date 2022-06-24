@@ -1,4 +1,4 @@
-import { addObject } from 'context'
+import { addObject, isInvokingCommand, isInvokingLoop, isInvokingTrigger } from 'context'
 
 /**
  * Create a new Video.
@@ -7,6 +7,9 @@ import { addObject } from 'context'
  * @param offset Offset of the video
  */
 export function createVideo(path: string, offset: number) {
+	if (isInvokingCommand() || isInvokingLoop() || isInvokingTrigger())
+		throw new Error("Do not call `createVideo` inside an invoke function of other `createSprite` or `createAnimation`'s method")
+
 	addObject<Video>({
 		type: 'Video',
 		path,

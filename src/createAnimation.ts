@@ -1,5 +1,4 @@
-import { addObject, doesWarnEmptyObject, getObjects, setIsInvokingCommand } from 'context'
-import { Sprite } from 'createSprite'
+import { addObject, doesWarnEmptyObject, getObjects, isInvokingCommand, isInvokingLoop, isInvokingTrigger, setIsInvokingCommand } from 'context'
 import { isValidAnimationLoopType, isValidLayer, isValidOrigin, isValidVector2 } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 import { Layer } from 'types/Layer'
@@ -52,6 +51,8 @@ export function createAnimation(
 	if (typeof frameCount !== 'number') throw new TypeError('Frame count must be a number.')
 	if (typeof frameDelay !== 'number') throw new TypeError('Frame delay must be a number.')
 	if (!isValidAnimationLoopType(loopType)) throw new TypeError(`${loopType} is not a valid loop type.`)
+	if (isInvokingCommand() || isInvokingLoop() || isInvokingTrigger())
+		throw new Error("Do not call `createAnimation` inside an invoke function of other `createSprite` or `createAnimation`'s method")
 
 	addObject<Animation>({
 		type: 'Animation',
@@ -73,7 +74,7 @@ export function createAnimation(
 }
 
 function isAnimationEmpty(): boolean {
-	const currentSprite = getObjects()[getObjects().length - 1] as Sprite
+	const currentAnimation = getObjects()[getObjects().length - 1] as Animation
 
-	return currentSprite.commands.length === 0
+	return currentAnimation.commands.length === 0
 }
