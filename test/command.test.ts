@@ -10,6 +10,7 @@ import {
 	moveXAtTime,
 	moveY,
 	moveYAtTime,
+	parameter,
 	rotate,
 	rotateAtTime,
 	scale,
@@ -21,6 +22,7 @@ import {
 import { createContext, useContext } from 'context'
 import { createSprite } from 'createSprite'
 import { generateStoryboardOsb } from 'generateStoryboardOsb'
+import { Parameter } from 'index'
 
 describe('command', () => {
 	it('should throw error when command is called outside of invoke function', () => {
@@ -51,6 +53,7 @@ describe('command', () => {
 			scaleAtTime(2000, 3)
 			scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
 			scaleVecAtTime(2000, { x: 200, y: 200 })
+			parameter(0, 3000, Parameter.AdditiveBlending)
 
 			loop(3000, 5, () => {
 				color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
@@ -69,6 +72,7 @@ describe('command', () => {
 				scaleAtTime(2000, 3)
 				scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
 				scaleVecAtTime(2000, { x: 200, y: 200 })
+				parameter(0, 3000, Parameter.AdditiveBlending)
 			})
 
 			trigger('HitSound', 5000, 10000, () => {
@@ -88,6 +92,7 @@ describe('command', () => {
 				scaleAtTime(2000, 3)
 				scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
 				scaleVecAtTime(2000, { x: 200, y: 200 })
+				parameter(0, 3000, Parameter.AdditiveBlending)
 			})
 
 			expect(generateStoryboardOsb()).toBe(
@@ -111,6 +116,7 @@ describe('command', () => {
 					' S,0,2000,,3\n' +
 					' V,0,0,1000,1,1,100,100\n' +
 					' V,0,2000,,200,200\n' +
+					' P,0,0,3000,A\n' +
 					// loop
 					' L,3000,5\n' +
 					'  C,0,0,1000,255,255,255,0,0,0\n' +
@@ -129,6 +135,7 @@ describe('command', () => {
 					'  S,0,2000,,3\n' +
 					'  V,0,0,1000,1,1,100,100\n' +
 					'  V,0,2000,,200,200\n' +
+					'  P,0,0,3000,A\n' +
 					// trigger
 					' T,HitSound,5000,10000\n' +
 					'  C,0,0,1000,255,255,255,0,0,0\n' +
@@ -147,6 +154,7 @@ describe('command', () => {
 					'  S,0,2000,,3\n' +
 					'  V,0,0,1000,1,1,100,100\n' +
 					'  V,0,2000,,200,200\n' +
+					'  P,0,0,3000,A\n' +
 					'//Storyboard Layer 1 (Fail)\n' +
 					'//Storyboard Layer 2 (Pass)\n' +
 					'//Storyboard Layer 3 (Foreground)\n' +

@@ -56,7 +56,7 @@ export function getCommandOsb({ type, startTime, endTime, startValue, endValue, 
 export function getParameterCommandOsb(parameterCommand: ParameterCommand, depth: 1 | 2): string {
 	const { type, easing, startTime, endTime, parameter } = parameterCommand
 
-	return depth === 1 ? ' ' : '  ' + [type, easing, startTime, endTime, parameter].join(',')
+	return (depth === 1 ? ' ' : '  ') + [type, easing, startTime, endTime, parameter].join(',') + '\n'
 }
 
 export function getLoopCommandOsb(loopCommand: LoopCommand): string {
@@ -66,7 +66,7 @@ export function getLoopCommandOsb(loopCommand: LoopCommand): string {
 }
 
 export function getTriggerCommandOsb(triggerCommand: TriggerCommand): string {
-	const { type, triggerType: triggerName, startTime, endTime, commands } = triggerCommand
+	const { type, triggerType, startTime, endTime, commands } = triggerCommand
 
-	return ' ' + [type, triggerName, startTime, endTime].join(',') + '\n' + getCommandsOsb(commands, 2)
+	return ' ' + [type, triggerType, startTime, endTime].join(',') + '\n' + getCommandsOsb(commands, 2)
 }
