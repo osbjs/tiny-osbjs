@@ -293,15 +293,11 @@ function radToDeg(rad: number): number
 Convert radians to degrees.
 
 ```ts
-export function randInt(min: number, max: number) {
-	return min + Math.floor(Math.random() * (max - min))
-}
+function randInt(min: number, max: number)
 ```
 Random integer in the interval [min, max].
 
 ```ts
-export function randFloat(min: number, max: number) {
-	return min + Math.random() * (max - min)
-}
+function randFloat(min: number, max: number)
 ```
 Random float in the interval [min, max].
