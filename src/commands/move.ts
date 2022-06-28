@@ -5,6 +5,7 @@ import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
 import { Timestamp } from 'types/Timestamp'
 import { Vector2 } from 'types/Vector2'
+import { roundVec } from 'utils/round'
 
 /**
  * Change the location of the object in the play area.
@@ -30,8 +31,8 @@ export function move(
 		easing,
 		startTime: tryParseTimestamp(startTime),
 		endTime: tryParseTimestamp(endTime),
-		startValue: startPosition,
-		endValue: endPosition,
+		startValue: roundVec(startPosition),
+		endValue: roundVec(endPosition),
 	})
 }
 
@@ -48,7 +49,7 @@ export function moveAtTime(time: number | Timestamp, position: Vector2) {
 		easing: Easing.Linear,
 		startTime: tryParseTimestamp(time),
 		endTime: tryParseTimestamp(time),
-		startValue: position,
-		endValue: position,
+		startValue: roundVec(position),
+		endValue: roundVec(position),
 	})
 }

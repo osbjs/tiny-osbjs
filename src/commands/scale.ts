@@ -4,6 +4,7 @@ import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
 import { Timestamp } from 'types/Timestamp'
+import { round } from 'utils/round'
 
 /**
  * Change the size of the object relative to its original size.
@@ -29,8 +30,8 @@ export function scale(
 		easing,
 		startTime: tryParseTimestamp(startTime),
 		endTime: tryParseTimestamp(endTime),
-		startValue: startScale,
-		endValue: endScale,
+		startValue: round(startScale),
+		endValue: round(endScale),
 	})
 }
 
@@ -47,7 +48,7 @@ export function scaleAtTime(time: number | Timestamp, scale: number) {
 		easing: Easing.Linear,
 		startTime: tryParseTimestamp(time),
 		endTime: tryParseTimestamp(time),
-		startValue: scale,
-		endValue: scale,
+		startValue: round(scale),
+		endValue: round(scale),
 	})
 }

@@ -4,6 +4,7 @@ import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
 import { Timestamp } from 'types/Timestamp'
+import { round } from 'utils/round'
 
 /**
  * Change the opacity of the object.
@@ -29,8 +30,8 @@ export function fade(
 		easing,
 		startTime: tryParseTimestamp(startTime),
 		endTime: tryParseTimestamp(endTime),
-		startValue: startOpacity,
-		endValue: endOpacity,
+		startValue: round(startOpacity),
+		endValue: round(endOpacity),
 	})
 }
 
@@ -47,7 +48,7 @@ export function fadeAtTime(time: number | Timestamp, opacity: number) {
 		easing: Easing.Linear,
 		startTime: tryParseTimestamp(time),
 		endTime: tryParseTimestamp(time),
-		startValue: opacity,
-		endValue: opacity,
+		startValue: round(opacity),
+		endValue: round(opacity),
 	})
 }

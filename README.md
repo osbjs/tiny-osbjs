@@ -221,20 +221,33 @@ function rotate(
 )
 function rotateAtTime(time: number, angle: number)
 ```
-Change the rotation of the object.
+Change the amount an object is rotated from its original image, in radians, clockwise.
 
 ### scale
 ```typescript
 function scale(
 	startTime: number | Timestamp, 
 	endTime: number | Timestamp, 
+	startScale: number, 
+	endScale: Vector2, 
+	easing: Easing = Easing.Linear
+)
+function scaleAtTime(time: number, scale: number)
+```
+Change the size of the object relative to its original size.
+
+### scaleVec
+```typescript
+function scaleVec(
+	startTime: number | Timestamp, 
+	endTime: number | Timestamp, 
 	startScale: Vector2, 
 	endScale: Vector2, 
 	easing: Easing = Easing.Linear
 )
-function scaleAtTime(time: number, scale: Vector2)
+function scaleVecAtTime(time: number, scale: Vector2)
 ```
-Change the scale of the object.
+Change the size of the object relative to its original size, but X and Y scale separately.
 
 ### color
 ```typescript

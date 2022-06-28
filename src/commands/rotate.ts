@@ -4,6 +4,7 @@ import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
 import { Timestamp } from 'types/Timestamp'
+import { round } from 'utils/round'
 
 /**
  * Change the amount an object is rotated from its original image, in radians, clockwise.
@@ -29,8 +30,8 @@ export function rotate(
 		easing,
 		startTime: tryParseTimestamp(startTime),
 		endTime: tryParseTimestamp(endTime),
-		startValue: startAngle,
-		endValue: endAngle,
+		startValue: round(startAngle),
+		endValue: round(endAngle),
 	})
 }
 
@@ -47,7 +48,7 @@ export function rotateAtTime(time: number | Timestamp, angle: number) {
 		easing: Easing.Linear,
 		startTime: tryParseTimestamp(time),
 		endTime: tryParseTimestamp(time),
-		startValue: angle,
-		endValue: angle,
+		startValue: round(angle),
+		endValue: round(angle),
 	})
 }

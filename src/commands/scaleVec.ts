@@ -5,6 +5,7 @@ import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
 import { Timestamp } from 'types/Timestamp'
 import { Vector2 } from 'types/Vector2'
+import { roundVec } from 'utils/round'
 
 /**
  * Change the size of the object relative to its original size, but X and Y scale separately.
@@ -30,8 +31,8 @@ export function scaleVec(
 		easing,
 		startTime: tryParseTimestamp(startTime),
 		endTime: tryParseTimestamp(endTime),
-		startValue: startScale,
-		endValue: endScale,
+		startValue: roundVec(startScale),
+		endValue: roundVec(endScale),
 	})
 }
 
@@ -41,14 +42,14 @@ export function scaleVec(
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * @param scale Scale vector at the given time.
  */
-export function scaleVecAtTime(time: number | Timestamp, position: Vector2) {
+export function scaleVecAtTime(time: number | Timestamp, sacle: Vector2) {
 	addCommandToCurrentObject<Command>({
 		__name__: 'Scale',
 		type: 'V',
 		easing: Easing.Linear,
 		startTime: tryParseTimestamp(time),
 		endTime: tryParseTimestamp(time),
-		startValue: position,
-		endValue: position,
+		startValue: roundVec(sacle),
+		endValue: roundVec(sacle),
 	})
 }

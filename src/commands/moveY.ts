@@ -4,6 +4,7 @@ import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
 import { Timestamp } from 'types/Timestamp'
+import { round } from 'utils/round'
 
 /**
  * Change the Y coordinate of the object.
@@ -23,8 +24,8 @@ export function moveY(startTime: number | Timestamp, endTime: number | Timestamp
 		easing,
 		startTime: tryParseTimestamp(startTime),
 		endTime: tryParseTimestamp(endTime),
-		startValue: startY,
-		endValue: endY,
+		startValue: round(startY),
+		endValue: round(endY),
 	})
 }
 
@@ -43,7 +44,7 @@ export function moveYAtTime(time: number | Timestamp, y: number) {
 		easing: Easing.Linear,
 		startTime: tryParseTimestamp(time),
 		endTime: tryParseTimestamp(time),
-		startValue: y,
-		endValue: y,
+		startValue: round(y),
+		endValue: round(y),
 	})
 }
