@@ -23,6 +23,7 @@ import { createContext, useContext } from 'context'
 import { createSprite } from 'createSprite'
 import { generateStoryboardOsb } from 'generateStoryboardOsb'
 import { Parameter } from 'index'
+import { round } from 'utils/round'
 
 describe('command', () => {
 	it('should throw error when command is called outside of invoke function', () => {
@@ -110,8 +111,8 @@ describe('command', () => {
 					' MX,0,2000,,200\n' +
 					' MY,0,0,1000,0,100\n' +
 					' MY,0,2000,,200\n' +
-					` R,0,0,1000,0,${Math.PI / 2}\n` +
-					` R,0,2000,,${Math.PI}\n` +
+					` R,0,0,1000,0,${round(Math.PI / 2)}\n` +
+					` R,0,2000,,${round(Math.PI)}\n` +
 					' S,0,0,1000,1,2\n' +
 					' S,0,2000,,3\n' +
 					' V,0,0,1000,1,1,100,100\n' +
@@ -129,8 +130,8 @@ describe('command', () => {
 					'  MX,0,2000,,200\n' +
 					'  MY,0,0,1000,0,100\n' +
 					'  MY,0,2000,,200\n' +
-					`  R,0,0,1000,0,${Math.PI / 2}\n` +
-					`  R,0,2000,,${Math.PI}\n` +
+					`  R,0,0,1000,0,${round(Math.PI / 2)}\n` +
+					`  R,0,2000,,${round(Math.PI)}\n` +
 					'  S,0,0,1000,1,2\n' +
 					'  S,0,2000,,3\n' +
 					'  V,0,0,1000,1,1,100,100\n' +
@@ -148,8 +149,8 @@ describe('command', () => {
 					'  MX,0,2000,,200\n' +
 					'  MY,0,0,1000,0,100\n' +
 					'  MY,0,2000,,200\n' +
-					`  R,0,0,1000,0,${Math.PI / 2}\n` +
-					`  R,0,2000,,${Math.PI}\n` +
+					`  R,0,0,1000,0,${round(Math.PI / 2)}\n` +
+					`  R,0,2000,,${round(Math.PI)}\n` +
 					'  S,0,0,1000,1,2\n' +
 					'  S,0,2000,,3\n' +
 					'  V,0,0,1000,1,1,100,100\n' +
