@@ -39,3 +39,7 @@ export function lengthVec(v: Vector2): number {
 export function areEqualVecs(v1: Vector2, v2: Vector2): boolean {
 	return v1.x === v2.x && v1.y === v2.y
 }
+
+export function cloneVec(v: Vector2): Vector2 {
+	return { x: v.x, y: v.y }
+}
