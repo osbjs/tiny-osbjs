@@ -314,3 +314,18 @@ Random integer in the interval [min, max].
 function randFloat(min: number, max: number)
 ```
 Random float in the interval [min, max].
+
+### Vector math
+```ts
+function addVec(v1: Vector2, v2: Vector2): Vector2
+function subVec(v1: Vector2, v2: Vector2): Vector2
+function mulVec(v1: Vector2, v2: Vector2): Vector2
+function mulVecScalar(v: Vector2, s: number): Vector2
+function addVecScalar(v: Vector2, s: number): Vector2
+function dotVec(v1: Vector2, v2: Vector2): number
+function crossVec(v1: Vector2, v2: Vector2): number
+function lengthSqrVec(v: Vector2): number
+function lengthVec(v: Vector2): number
+function areEqualVecs(v1: Vector2, v2: Vector2): boolean
+```
+Self-explanatory.
