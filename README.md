@@ -296,6 +296,11 @@ function trigger(
 	endTime: number | Timestamp, 
 	invokeFunction: () => void
 )
+type TriggerType = `HitSound${SampleSet}${AdditionsSampleSet}${Addition}${CustomSampleSet}`
+type SampleSet = '' | 'All' | 'Normal' | 'Soft' | 'Drum'
+type AdditionsSampleSet = SampleSet
+type Addition = '' | 'Whistle' | 'Finish' | 'Clap'
+type CustomSampleSet = number | ''
 ```
 Create a trigger group.
 
@@ -304,7 +309,6 @@ Trigger loops can be used to trigger animations based on play-time events. Altho
 
 ### Common types
 ```ts
-type AudioPath = `${string}.mp3` | `${string}.ogg` | `${string}.wav`
 type Color = {
 	r: number
 	g: number
