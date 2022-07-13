@@ -301,6 +301,61 @@ Create a trigger group.
 
 Trigger loops can be used to trigger animations based on play-time events. Although called loops, trigger loops only execute once when triggered.Trigger loops are zero-based similar to normal loops. If two overlap, the first will be halted and replaced by a new loop from the beginning. If they overlap any existing storyboarded events, they will not trigger until those transformations are no in effect.
 
+
+### Common types
+```ts
+type AudioPath = `${string}.mp3` | `${string}.ogg` | `${string}.wav`
+type Color = {
+	r: number
+	g: number
+	b: number
+}
+enum Easing {
+	Linear,
+	Out,
+	In,
+	InQuad,
+	OutQuad,
+	InOutQuad,
+	InCubic,
+	OutCubic,
+	InOutCubic,
+	InQuart,
+	OutQuart,
+	InOutQuart,
+	InQuint,
+	OutQuint,
+	InOutQuint,
+	InSine,
+	OutSine,
+	InOutSine,
+	InExpo,
+	OutExpo,
+	InOutExpo,
+	InCirc,
+	OutCirc,
+	InOutCirc,
+	InElastic,
+	OutElastic,
+	OutElasticHalf,
+	OutElasticQuarter,
+	InOutElastic,
+	InBack,
+	OutBack,
+	InOutBack,
+	InBounce,
+	OutBounce,
+	InOutBounce,
+}
+type Layer = 'Background' | 'Foreground' | 'Fail' | 'Pass' | 'Overlay'
+type Origin = 'TopLeft' | 'TopCentre' | 'TopRight' | 'CentreLeft' | 'Centre' | 'CentreRight' | 'BottomLeft' | 'BottomCentre' | 'BottomRight'
+type Timestamp = `${number}:${number}:${number}`
+type Vector2 = {
+	x: number
+	y: number
+}
+```
+
 ### Utility functions
 ```typescript
 function degToRad(deg: number): number
