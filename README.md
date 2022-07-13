@@ -1,8 +1,6 @@
 # tiny-osbjs
 A declarative osu! storyboard library with zero dependencies and zero configurations.
 
-If you need more features, please consider using [osbjs](https://osbjs.vercel.app).
-
 ## Install
 ```bash
 npm install @osbjs/tiny-osbjs
