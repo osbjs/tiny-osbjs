@@ -264,12 +264,21 @@ The virtual light source colour on the object. The colours of the pixels on the 
 
 ### parameter
 ```typescript
+function additiveBlending(startTime: number, endTime: number)
+function flipHorizontal(startTime: number, endTime: number)
+function flipVertical(startTime: number, endTime: number)
+// Not recommended
 function parameter(
 	startTime: number | Timestamp, 
 	endTime: number | Timestamp, 
 	parameter: Parameter, 
 	easing: Easing = Easing.Linear
 )
+enum Parameter {
+	FlipHorizontal = 'H',
+	FlipVertical = 'V',
+	AdditiveBlending = 'A',
+}
 ```
 Unlike the other commands, which can be seen as setting endpoints along continually-tracked values, the `parameter` command apply ONLY while they are active, i.e.,you can't put a command from timestamps 1000 to 2000 and expect the value to apply at time 3000, even if the object's other commands aren't finished by that point.
 
@@ -329,3 +338,9 @@ function lengthVec(v: Vector2): number
 function areEqualVecs(v1: Vector2, v2: Vector2): boolean
 ```
 Self-explanatory.
+
+### reportBuildTime
+```ts
+function reportBuildTime(sb: () => void)
+```
+Print to console how long it takes to generate the storyboard.

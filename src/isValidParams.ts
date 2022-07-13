@@ -25,7 +25,7 @@ export function isValidAnimationLoopType(loopType: string): loopType is Animatio
 }
 
 export function isValidParameter(parameter: Parameter): parameter is Parameter {
-	return ['', 'H', 'V', 'A'].includes(parameter)
+	return ['H', 'V', 'A'].includes(parameter)
 }
 
 export function isValidColor(color: Color): color is Color {

@@ -27,3 +27,30 @@ export function parameter(startTime: number, endTime: number, parameter: Paramet
 		parameter,
 	})
 }
+
+/**
+ * Use additive-colour blending instead of alpha-blending. Shorthand for `parameter` command.
+ * @param startTime Time in milliseconds/timestamp indicate when the event will start.
+ * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ */
+export function additiveBlending(startTime: number, endTime: number) {
+	parameter(startTime, endTime, Parameter.AdditiveBlending)
+}
+
+/**
+ * Flip the image horizontally. Shorthand for `parameter` command.
+ * @param startTime Time in milliseconds/timestamp indicate when the event will start.
+ * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ */
+export function flipHorizontal(startTime: number, endTime: number) {
+	parameter(startTime, endTime, Parameter.FlipHorizontal)
+}
+
+/**
+ * Flip the image vertically. Shorthand for `parameter` command.
+ * @param startTime Time in milliseconds/timestamp indicate when the event will start.
+ * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ */
+export function flipVertical(startTime: number, endTime: number) {
+	parameter(startTime, endTime, Parameter.FlipVertical)
+}
