@@ -401,3 +401,8 @@ Self-explanatory.
 function reportBuildTime(sb: () => void)
 ```
 Print to console how long it takes to generate the storyboard.
+
+## Official plugins
+- [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effects.
+- [@osbjs/hitobjects-tiny-osbjs](https://github.com/osbjs/hitobjects-tiny-osbjs) - Get hit objects position used to create highlight effects.
+- [@osbjs/txtgen-tiny-osbjs](https://github.com/osbjs/txtgen-tiny-osbjs) - Generate text images, commonly used for creating lyrics.
