@@ -15,10 +15,9 @@
  * })
  * ```
  */
-export function reportBuildTime(sb: () => void) {
+export function reportBuildTime(sb: (end: () => void) => void) {
 	const startTime = Date.now()
 
-	sb()
-
-	console.log(`Done in ${(Date.now() - startTime) / 1000} s.`)
+	const end = () => console.log(`Done in ${(Date.now() - startTime) / 1000} s.`)
+	sb(end)
 }
