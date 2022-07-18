@@ -3,7 +3,7 @@
  * @param sb Your storyboard
  * @example
  * ```ts
- * reportBuildTime(() => {
+ * reportBuildTime((end) => {
  * 		useContext(createContext())
  *
  * 		createSprite('bg.jpg', 'Background', 'Centre', { x: 320, y: 240 }, () => {
@@ -12,6 +12,7 @@
  *		})
  *
  * 		generateStoryboardOsb()
+ * 		end()
  * })
  * ```
  */
