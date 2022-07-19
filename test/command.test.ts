@@ -1,8 +1,11 @@
 import {
+	additiveBlending,
 	color,
 	colorAtTime,
 	fade,
 	fadeAtTime,
+	flipHorizontal,
+	flipVertical,
 	loop,
 	move,
 	moveAtTime,
@@ -10,7 +13,6 @@ import {
 	moveXAtTime,
 	moveY,
 	moveYAtTime,
-	parameter,
 	rotate,
 	rotateAtTime,
 	scale,
@@ -22,7 +24,6 @@ import {
 import { createContext, useContext } from 'context'
 import { createSprite } from 'createSprite'
 import { generateStoryboardOsb } from 'generateStoryboardOsb'
-import { Parameter } from 'index'
 import { round } from 'utils/round'
 
 describe('command', () => {
@@ -54,7 +55,9 @@ describe('command', () => {
 			scaleAtTime(2000, 3)
 			scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
 			scaleVecAtTime(2000, { x: 200, y: 200 })
-			parameter(0, 3000, Parameter.AdditiveBlending)
+			additiveBlending(0, 3000)
+			flipHorizontal(0, 3000)
+			flipVertical(0, 3000)
 
 			loop(3000, 5, () => {
 				color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
@@ -73,7 +76,9 @@ describe('command', () => {
 				scaleAtTime(2000, 3)
 				scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
 				scaleVecAtTime(2000, { x: 200, y: 200 })
-				parameter(0, 3000, Parameter.AdditiveBlending)
+				additiveBlending(0, 3000)
+				flipHorizontal(0, 3000)
+				flipVertical(0, 3000)
 			})
 
 			trigger('HitSound', 5000, 10000, () => {
@@ -93,7 +98,9 @@ describe('command', () => {
 				scaleAtTime(2000, 3)
 				scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
 				scaleVecAtTime(2000, { x: 200, y: 200 })
-				parameter(0, 3000, Parameter.AdditiveBlending)
+				additiveBlending(0, 3000)
+				flipHorizontal(0, 3000)
+				flipVertical(0, 3000)
 			})
 
 			expect(generateStoryboardOsb()).toBe(
@@ -118,6 +125,8 @@ describe('command', () => {
 					' V,0,0,1000,1,1,100,100\n' +
 					' V,0,2000,,200,200\n' +
 					' P,0,0,3000,A\n' +
+					' P,0,0,3000,H\n' +
+					' P,0,0,3000,V\n' +
 					// loop
 					' L,3000,5\n' +
 					'  C,0,0,1000,255,255,255,0,0,0\n' +
@@ -137,6 +146,8 @@ describe('command', () => {
 					'  V,0,0,1000,1,1,100,100\n' +
 					'  V,0,2000,,200,200\n' +
 					'  P,0,0,3000,A\n' +
+					'  P,0,0,3000,H\n' +
+					'  P,0,0,3000,V\n' +
 					// trigger
 					' T,HitSound,5000,10000\n' +
 					'  C,0,0,1000,255,255,255,0,0,0\n' +
@@ -156,6 +167,8 @@ describe('command', () => {
 					'  V,0,0,1000,1,1,100,100\n' +
 					'  V,0,2000,,200,200\n' +
 					'  P,0,0,3000,A\n' +
+					'  P,0,0,3000,H\n' +
+					'  P,0,0,3000,V\n' +
 					'//Storyboard Layer 1 (Fail)\n' +
 					'//Storyboard Layer 2 (Pass)\n' +
 					'//Storyboard Layer 3 (Foreground)\n' +
