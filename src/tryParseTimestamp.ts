@@ -6,7 +6,7 @@ export function tryParseTimestamp(timestamp: number | Timestamp): number {
 	const match = timestamp.match(/^(\d{2,}):(\d{2}):(\d{3})$/)
 
 	if (!match) {
-		throw new Error(`${timestamp} is not a valid osu timestamp.`)
+		throw new Error(`${timestamp.toString()} is not a valid osu timestamp.`)
 	}
 
 	const minutes = match[1] ? parseInt(match[1], 10) * 60000 : 0

@@ -2,49 +2,56 @@ import { addCommandToCurrentObject } from 'context'
 import { isValidEasing } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Command } from 'types/Command'
+import { NumericCommandValue, TimeValue } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
-import { Timestamp } from 'types/Timestamp'
 import { round } from 'utils/round'
 
 /**
  * Change the Y coordinate of the object.
  *
- * @param startTime Time in milliseconds/timestamp indicate when the event will start.
- * @param endTime Time in milliseconds/timestamp indicate when the event will end.
- * @param startY Y coordinate at the start of the animation.
- * @param endY Y coordinate at the end of the animation.
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * Pass in [startTime, endTime] if you want to make the Y coordinate of the object changes overtime.
+ * @param y Y coordinate at the given time.
+ * Pass in [startValue, endValue] if you want to make the Y coordinate of the object changes overtime.
  * @param easing How the command should "accelerate".
  */
-export function moveY(startTime: number | Timestamp, endTime: number | Timestamp, startY: number, endY: number, easing: Easing = Easing.Linear) {
+export function moveY(time: TimeValue, y: NumericCommandValue, easing?: Easing) {
+	let startTime: number, endTime: number, startValue: number, endValue: number
+
+	if (y instanceof Array) {
+		if (!(time instanceof Array)) throw new Error('A value cannot be changed if start time and end time are equal.')
+		startValue = y[0]
+		endValue = y[1]
+
+		if (typeof startValue != 'number') throw new Error('`startValue` must be a number.')
+		if (typeof endValue != 'number') throw new Error('`endValue` must be a number.')
+
+		startValue = round(startValue)
+		endValue = round(endValue)
+	} else {
+		if (typeof y != 'number') throw new Error('`y` must be a number, or an array consists of 2 numbers.')
+
+		startValue = endValue = round(y)
+	}
+
+	if (time instanceof Array) {
+		startTime = tryParseTimestamp(time[0])
+		endTime = tryParseTimestamp(time[1])
+	} else {
+		startTime = endTime = tryParseTimestamp(time)
+	}
+
+	if (typeof easing == 'undefined') easing = Easing.Linear
+
 	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
 
 	addCommandToCurrentObject<Command>({
 		__name__: 'MoveX',
 		type: 'MY',
 		easing,
-		startTime: tryParseTimestamp(startTime),
-		endTime: tryParseTimestamp(endTime),
-		startValue: round(startY),
-		endValue: round(endY),
-	})
-}
-
-/**
- * Shorthand command for `moveY` when `startTime` and `endTime` are equal.
- *
- * @param time Time in milliseconds/timestamp indicates when the event will occur.
- * @param y Y coordinate at the given time.
- */
-export function moveYAtTime(time: number | Timestamp, y: number) {
-	if (typeof y != 'number') throw new TypeError('y must be number.')
-
-	addCommandToCurrentObject<Command>({
-		__name__: 'MoveX',
-		type: 'MY',
-		easing: Easing.Linear,
-		startTime: tryParseTimestamp(time),
-		endTime: tryParseTimestamp(time),
-		startValue: round(y),
-		endValue: round(y),
+		startTime,
+		endTime,
+		startValue,
+		endValue,
 	})
 }

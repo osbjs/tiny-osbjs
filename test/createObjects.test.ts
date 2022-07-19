@@ -13,8 +13,14 @@ describe('create object', () => {
 
 		const customComponent = () => {
 			createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
-				fade(0, 1000, 0, 1)
-				move(0, 1000, { x: 0, y: 0 }, { x: 100, y: 100 })
+				fade([0, 1000], [0, 1])
+				move(
+					[0, 1000],
+					[
+						{ x: 0, y: 0 },
+						{ x: 100, y: 100 },
+					]
+				)
 			})
 		}
 

@@ -24,7 +24,7 @@ export function isValidAnimationLoopType(loopType: string): loopType is Animatio
 	return ['LoopForever', 'LoopOnce'].includes(loopType)
 }
 
-export function isValidParameter(parameter: Parameter): parameter is Parameter {
+export function isValidParameter(parameter: string | Parameter): parameter is Parameter {
 	return ['H', 'V', 'A'].includes(parameter)
 }
 
@@ -32,7 +32,7 @@ export function isValidColor(color: Color): color is Color {
 	return typeof color.r === 'number' && typeof color.g === 'number' && typeof color.b === 'number'
 }
 
-export function isValidEasing(easing: number): easing is Easing {
+export function isValidEasing(easing: number | Easing): easing is Easing {
 	return typeof easing === 'number' && easing >= 0 && easing <= 34
 }
 

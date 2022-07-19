@@ -1,6 +1,7 @@
 import { addCommandToCurrentObject } from 'context'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Parameter, ParameterCommand } from 'types/Command'
+import { TimeValue } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
 
 /**
@@ -26,27 +27,54 @@ function parameter(startTime: number, endTime: number, parameter: Parameter) {
 
 /**
  * Use additive-colour blending instead of alpha-blending.
- * @param startTime Time in milliseconds/timestamp indicate when the event will start.
- * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function additiveBlending(startTime: number, endTime: number) {
+export function additiveBlending(time: TimeValue) {
+	let startTime: number, endTime: number
+
+	if (time instanceof Array) {
+		startTime = tryParseTimestamp(time[0])
+		endTime = tryParseTimestamp(time[1])
+	} else {
+		startTime = endTime = tryParseTimestamp(time)
+	}
+
 	parameter(startTime, endTime, Parameter.AdditiveBlending)
 }
 
 /**
  * Flip the image horizontally.
- * @param startTime Time in milliseconds/timestamp indicate when the event will start.
- * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function flipHorizontal(startTime: number, endTime: number) {
+export function flipHorizontal(time: TimeValue) {
+	let startTime: number, endTime: number
+
+	if (time instanceof Array) {
+		startTime = tryParseTimestamp(time[0])
+		endTime = tryParseTimestamp(time[1])
+	} else {
+		startTime = endTime = tryParseTimestamp(time)
+	}
+
 	parameter(startTime, endTime, Parameter.FlipHorizontal)
 }
 
 /**
  * Flip the image vertically.
- * @param startTime Time in milliseconds/timestamp indicate when the event will start.
- * @param endTime Time in milliseconds/timestamp indicate when the event will end.
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function flipVertical(startTime: number, endTime: number) {
+export function flipVertical(time: TimeValue) {
+	let startTime: number, endTime: number
+
+	if (time instanceof Array) {
+		startTime = tryParseTimestamp(time[0])
+		endTime = tryParseTimestamp(time[1])
+	} else {
+		startTime = endTime = tryParseTimestamp(time)
+	}
+
 	parameter(startTime, endTime, Parameter.FlipVertical)
 }

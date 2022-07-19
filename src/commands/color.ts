@@ -1,60 +1,60 @@
 import { addCommandToCurrentObject } from 'context'
-import { isValidEasing } from 'isValidParams'
+import { isValidColor, isValidEasing } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Color } from 'types/Color'
 import { Command } from 'types/Command'
+import { ColorCommandValue, TimeValue } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
-import { Timestamp } from 'types/Timestamp'
+import { roundColor } from 'utils/round'
 
 /**
  * The virtual light source colour on the object. The colours of the pixels on the object are determined subtractively.
  *
- * @param startTime Time in milliseconds/timestamp indicate when the event will start.
- * @param endTime Time in milliseconds/timestamp indicate when the event will end.
- * @param startColor Color at the start of the animation.
- * Sprites with (255,255,255) will be their original colour and sprites with (0,0,0) will be totally black.
- * Anywhere in between will result in subtractive colouring.
- * @param endColor Color at the start of the animation.
+ * @param time Time in milliseconds/timestamp indicates when the event will occur.
+ * Pass in [startTime, endTime] if you want to make the color changes overtime.
+ * @param color Color at the given time.
+ * Pass in [startValue, endValue] if you want to make the color changes overtime.
  * Sprites with (255,255,255) will be their original colour and sprites with (0,0,0) will be totally black.
  * Anywhere in between will result in subtractive colouring.
  * @param easing How the command should "accelerate".
  */
-export function color(
-	startTime: number | Timestamp,
-	endTime: number | Timestamp,
-	startColor: Color,
-	endColor: Color,
-	easing: Easing = Easing.Linear
-) {
+export function color(time: TimeValue, color: ColorCommandValue, easing?: Easing) {
+	let startTime: number, endTime: number, startValue: Color, endValue: Color
+
+	if (color instanceof Array) {
+		if (!(time instanceof Array)) throw new Error('A value cannot be changed if start time and end time are equal.')
+		startValue = color[0]
+		endValue = color[1]
+
+		if (!isValidColor(startValue)) throw new Error('`startValue` is not a valid `Color` object.')
+		if (!isValidColor(endValue)) throw new Error('`endValue` is not a valid `Color` object.')
+
+		startValue = roundColor(startValue)
+		endValue = roundColor(endValue)
+	} else {
+		if (!isValidColor(color)) throw new Error('`color` must be a valid `Color` object, or an array consists of 2 `Color` objects.')
+
+		startValue = endValue = color
+	}
+
+	if (time instanceof Array) {
+		startTime = tryParseTimestamp(time[0])
+		endTime = tryParseTimestamp(time[1])
+	} else {
+		startTime = endTime = tryParseTimestamp(time)
+	}
+
+	if (typeof easing == 'undefined') easing = Easing.Linear
+
 	if (!isValidEasing(easing)) throw new Error(easing + ' is not a valid easing. Use `Easing` enum instead')
 
 	addCommandToCurrentObject<Command>({
 		__name__: 'Color',
 		type: 'C',
 		easing,
-		startTime: tryParseTimestamp(startTime),
-		endTime: tryParseTimestamp(endTime),
-		startValue: startColor,
-		endValue: endColor,
-	})
-}
-
-/**
- * Shorthand command for `color` when `startTime` and `endTime` are equal.
- *
- * @param time Time in milliseconds/timestamp indicates when the event will occur.
- * @param color Color at the given time.
- * Sprites with (255,255,255) will be their original colour and sprites with (0,0,0) will be totally black.
- * Anywhere in between will result in subtractive colouring.
- */
-export function colorAtTime(time: number | Timestamp, color: Color) {
-	addCommandToCurrentObject<Command>({
-		__name__: 'Color',
-		type: 'C',
-		easing: Easing.Linear,
-		startTime: tryParseTimestamp(time),
-		endTime: tryParseTimestamp(time),
-		startValue: color,
-		endValue: color,
+		startTime,
+		endTime,
+		startValue,
+		endValue,
 	})
 }

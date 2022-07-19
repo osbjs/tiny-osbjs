@@ -14,19 +14,27 @@ import { Timestamp } from 'types/Timestamp'
  * If they overlap any existing storyboarded events, they will not trigger until those transformations are no in effect.
  *
  * @param triggerType The trigger condition, see https://osu.ppy.sh/wiki/en/Storyboard/Scripting/Compound_Commands#trigger-(t)-command.
- * @param startTime Time in milliseconds/timestamp at which the trigger is valid.
- * @param endTime Time in milliseconds/timestamp at which the trigger stops being valid.
+ * @param time [startTime, endTime] time in milliseconds/timestamp at which the trigger is valid.
  * @param invokeFunction The commands that should be run when the trigger group is created.
  */
-export function trigger(triggerType: TriggerType, startTime: number | Timestamp, endTime: number | Timestamp, invokeFunction: () => void) {
+export function trigger(time: [number | Timestamp, number | Timestamp], triggerType: TriggerType, invokeFunction: () => void) {
 	if (!isValidTriggerType(triggerType)) throw new Error(`${triggerType} is not a valid trigger type.`)
+
+	let startTime: number, endTime: number
+
+	if (time instanceof Array) {
+		startTime = tryParseTimestamp(time[0])
+		endTime = tryParseTimestamp(time[1])
+	} else {
+		startTime = endTime = tryParseTimestamp(time)
+	}
 
 	addCommandToCurrentObject<TriggerCommand>({
 		__name__: 'Trigger',
 		type: 'T',
 		triggerType,
-		startTime: tryParseTimestamp(startTime),
-		endTime: tryParseTimestamp(endTime),
+		startTime,
+		endTime,
 		commands: [],
 	})
 	setIsInvokingTrigger(true)

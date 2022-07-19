@@ -3,8 +3,33 @@ A declarative osu! storyboard library with zero dependencies and zero configurat
 
 ## Install
 ```bash
-npm install @osbjs/tiny-osbjs
+npm install @osbjs/tiny-osbjs@latest
 ```
+
+## Setup your project
+It's strongly recommended to use `TypeScript` and a text editor/IDE with good `TypeScript` support like `VSCode` for better developing experience.
+```bash
+npm install -D typescript
+```
+
+Install `node-dev` as a global package so you can use it anywhere (you will only need to do this once).
+```bash
+npm install -g node-dev
+```
+
+If you are using TypeScript, install `ts-node` as dev-dependency
+```bash
+npm install -D ts-node
+```
+
+Then add this script to your package.json:
+```json
+...
+"scripts": {
+	"start": "node-dev index.js" // or "node-dev index.ts" if you are using TypeScript
+}
+```
+`index.js` (`index.ts`) is the entry point to your storyboard. This way when you run `npm start` it will automatically rebuild your storyboard when you change your code.
 
 ## Usage
 Before you do anything, you have to create a storyboard context and tell the library to use it. This context is shared accross the whole project. 
@@ -44,16 +69,22 @@ difficulty1Storyboard()
 difficulty2Storyboard()
 ```
 
+Most of the commands will have their syntax look like this (except for a few special commands):
+```ts
+commandName([startTime, endTime], [startValue, endValue], easing)
+commandName([startTime, endTime], value, easing)
+commandName(time, value)
+```
 
 The killer-feature of `tiny-osb` is that you can specify the commands in a declarative way and the library will know which objects they are refering to.
 ```javascript
 const { createSprite, fade, loop } = require('@osbjs/tiny-osbjs')
 
 createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
-	fade(0, 1000, 0, 1) // refers to sprite
+	fade([0, 1000], [0, 1], Easing.Out) // refers to sprite
 
 	loop(3000, 5, () => {
-		fade(0, 1000, 0, 1) // refers to loop
+		fade([0, 1000], [0, 1], Easing.Out) // refers to loop
 	})
 })
 ```
@@ -63,7 +94,7 @@ You can pass osu timestamp to the start time/end time of the command and the lib
 const { createSprite, fade, loop } = require('@osbjs/tiny-osbjs')
 
 createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
-	fade(0, "00:00:015", 0, 1) // this works
+	fade([0, "00:00:015"], [0, 1]) // this works
 })
 ```
 
@@ -72,7 +103,21 @@ Finally, you can generate osb string of the storyboard. You can use that string 
 const { generateStoryboardOsb } = require('@osbjs/tiny-osbjs')
 
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
-``` 
+```
+
+Your final storyboard will look like this:
+```js
+const { createContext, createSprite, fade, generateStoryboardOsb, useContext } = require('@osbjs/tiny-osbjs')
+
+const context = createContext()
+useContext(context)
+
+createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
+	fade([0, 1000], [0, 1])
+})
+
+fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
+```
 
 ## API documentation
 
@@ -150,113 +195,51 @@ function replaceOsuEvents(parsedOsuDifficulty: string): string
 ```
 Returns .osu file after replacing \[Events\] section with events generated from storyboard.
 
-### getReportForOverlappingCommands
-```typescript
-function getReportForOverlappingCommands()
-```
-Get a report for each object that has overlapping commands.
-
 ### fade
 ```typescript
-function fade(
-	startTime: number | Timestamp,
-	endTime: number | Timestamp,
-	startOpacity: number, 
-	endOpacity: number, 
-	easing: Easing = Easing.Linear
-)
-function fadeAtTime(time: number, opacity: number) // shorthand
+function fade(time: TimeValue, opacity: NumericCommandValue, easing?: Easing)
 ```
 Change the opacity of the object.
 
 ### move
 ```typescript
-function move(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startPosition: Vector2, 
-	endPosition: Vector2, 
-	easing: Easing = Easing.Linear
-)
-function moveAtTime(time: number, position: Vector2)
+function move(time: TimeValue, position: Vector2CommandValue, easing?: Easing)
 ```
 Change the location of the object in the play area.
 
 ### moveX
 ```typescript
-function moveX(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startX: number, 
-	endX: number, 
-	easing: Easing = Easing.Linear
-)
-function moveXAtTime(time: number, x: number)
+function moveX(time: TimeValue, x: NumericCommandValue, easing?: Easing)
 ```
 Change the x coordinate of the object.
 
 ### moveY
 ```typescript
-function moveY(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startY: number, 
-	endY: number, 
-	easing: Easing = Easing.Linear
-)
-function moveYAtTime(time: number, y: number)
+function moveY(time: TimeValue, y: NumericCommandValue, easing?: Easing)
 ```
 Change the y coordinate of the object.
 
 ### rotate
 ```typescript
-function rotate(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startAngle: number, 
-	endAngle: number, 
-	easing: Easing = Easing.Linear
-)
-function rotateAtTime(time: number, angle: number)
+function rotate(time: TimeValue, angle: NumericCommandValue, easing?: Easing)
 ```
 Change the amount an object is rotated from its original image, in radians, clockwise.
 
 ### scale
 ```typescript
-function scale(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startScale: number, 
-	endScale: Vector2, 
-	easing: Easing = Easing.Linear
-)
-function scaleAtTime(time: number, scale: number)
+function scale(time: TimeValue, scaleFactor: NumericCommandValue, easing?: Easing)
 ```
 Change the size of the object relative to its original size.
 
 ### scaleVec
 ```typescript
-function scaleVec(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startScale: Vector2, 
-	endScale: Vector2, 
-	easing: Easing = Easing.Linear
-)
-function scaleVecAtTime(time: number, scale: Vector2)
+function scaleVec(time: TimeValue, scaleVector: Vector2CommandValue, easing?: Easing)
 ```
 Change the size of the object relative to its original size, but X and Y scale separately.
 
 ### color
 ```typescript
-function color(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	startColor: Color, 
-	endColor: Color, 
-	easing: Easing = Easing.Linear
-)
-function colorAtTime(time: number, color: Color)
+function color(time: TimeValue, color: ColorCommandValue, easing?: Easing)
 ```
 The virtual light source colour on the object. The colours of the pixels on the object are determined subtractively.
 
@@ -312,6 +295,7 @@ type Color = {
 	g: number
 	b: number
 }
+
 enum Easing {
 	Linear,
 	Out,
@@ -349,13 +333,25 @@ enum Easing {
 	OutBounce,
 	InOutBounce,
 }
+
 type Layer = 'Background' | 'Foreground' | 'Fail' | 'Pass' | 'Overlay'
+
 type Origin = 'TopLeft' | 'TopCentre' | 'TopRight' | 'CentreLeft' | 'Centre' | 'CentreRight' | 'BottomLeft' | 'BottomCentre' | 'BottomRight'
+
 type Timestamp = `${number}:${number}:${number}`
+
 type Vector2 = {
 	x: number
 	y: number
 }
+
+type NumericCommandValue = [number, number] | number
+
+type Vector2CommandValue = [Vector2, Vector2] | Vector2
+
+type ColorCommandValue = [Color, Color] | Color
+
+type TimeValue = number | Timestamp | [number | Timestamp, number | Timestamp]
 ```
 
 ### Utility functions

@@ -1,26 +1,4 @@
-import {
-	additiveBlending,
-	color,
-	colorAtTime,
-	fade,
-	fadeAtTime,
-	flipHorizontal,
-	flipVertical,
-	loop,
-	move,
-	moveAtTime,
-	moveX,
-	moveXAtTime,
-	moveY,
-	moveYAtTime,
-	rotate,
-	rotateAtTime,
-	scale,
-	scaleAtTime,
-	scaleVec,
-	scaleVecAtTime,
-	trigger,
-} from 'commands'
+import { additiveBlending, color, fade, flipHorizontal, flipVertical, loop, move, moveX, moveY, rotate, scale, scaleVec, trigger } from 'commands'
 import { createContext, useContext } from 'context'
 import { createSprite } from 'createSprite'
 import { generateStoryboardOsb } from 'generateStoryboardOsb'
@@ -31,7 +9,13 @@ describe('command', () => {
 		expect(() => {
 			useContext(createContext())
 
-			color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
+			color(
+				[0, 1000],
+				[
+					{ r: 255, g: 255, b: 255 },
+					{ r: 0, g: 0, b: 0 },
+				]
+			)
 		}).toThrowError(`Color command must be called inside an invoke function.`)
 	})
 
@@ -39,68 +23,122 @@ describe('command', () => {
 		useContext(createContext())
 
 		createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
-			color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
-			colorAtTime(2000, { r: 100, g: 100, b: 100 })
-			fade(0, 1000, 0, 1)
-			fadeAtTime(2000, 0.5)
-			move(0, 1000, { x: 0, y: 0 }, { x: 100, y: 100 })
-			moveAtTime(2000, { x: 200, y: 200 })
-			moveX(0, 1000, 0, 100)
-			moveXAtTime(2000, 200)
-			moveY(0, 1000, 0, 100)
-			moveYAtTime(2000, 200)
-			rotate(0, 1000, 0, Math.PI / 2)
-			rotateAtTime(2000, Math.PI)
-			scale(0, 1000, 1, 2)
-			scaleAtTime(2000, 3)
-			scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
-			scaleVecAtTime(2000, { x: 200, y: 200 })
-			additiveBlending(0, 3000)
-			flipHorizontal(0, 3000)
-			flipVertical(0, 3000)
+			color(
+				[0, 1000],
+				[
+					{ r: 255, g: 255, b: 255 },
+					{ r: 0, g: 0, b: 0 },
+				]
+			)
+			color(2000, { r: 100, g: 100, b: 100 })
+			fade([0, 1000], [0, 1])
+			fade(2000, 0.5)
+			move(
+				[0, 1000],
+				[
+					{ x: 0, y: 0 },
+					{ x: 100, y: 100 },
+				]
+			)
+			move(2000, { x: 200, y: 200 })
+			moveX([0, 1000], [0, 100])
+			moveX(2000, 200)
+			moveY([0, 1000], [0, 100])
+			moveY(2000, 200)
+			rotate([0, 1000], [0, Math.PI / 2])
+			rotate(2000, Math.PI)
+			scale([0, 1000], [1, 2])
+			scale(2000, 3)
+			scaleVec(
+				[0, 1000],
+				[
+					{ x: 1, y: 1 },
+					{ x: 100, y: 100 },
+				]
+			)
+			scaleVec(2000, { x: 200, y: 200 })
+			additiveBlending([0, 3000])
+			flipHorizontal([0, 3000])
+			flipVertical([0, 3000])
 
 			loop(3000, 5, () => {
-				color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
-				colorAtTime(2000, { r: 100, g: 100, b: 100 })
-				fade(0, 1000, 0, 1)
-				fadeAtTime(2000, 0.5)
-				move(0, 1000, { x: 0, y: 0 }, { x: 100, y: 100 })
-				moveAtTime(2000, { x: 200, y: 200 })
-				moveX(0, 1000, 0, 100)
-				moveXAtTime(2000, 200)
-				moveY(0, 1000, 0, 100)
-				moveYAtTime(2000, 200)
-				rotate(0, 1000, 0, Math.PI / 2)
-				rotateAtTime(2000, Math.PI)
-				scale(0, 1000, 1, 2)
-				scaleAtTime(2000, 3)
-				scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
-				scaleVecAtTime(2000, { x: 200, y: 200 })
-				additiveBlending(0, 3000)
-				flipHorizontal(0, 3000)
-				flipVertical(0, 3000)
+				color(
+					[0, 1000],
+					[
+						{ r: 255, g: 255, b: 255 },
+						{ r: 0, g: 0, b: 0 },
+					]
+				)
+				color(2000, { r: 100, g: 100, b: 100 })
+				fade([0, 1000], [0, 1])
+				fade(2000, 0.5)
+				move(
+					[0, 1000],
+					[
+						{ x: 0, y: 0 },
+						{ x: 100, y: 100 },
+					]
+				)
+				move(2000, { x: 200, y: 200 })
+				moveX([0, 1000], [0, 100])
+				moveX(2000, 200)
+				moveY([0, 1000], [0, 100])
+				moveY(2000, 200)
+				rotate([0, 1000], [0, Math.PI / 2])
+				rotate(2000, Math.PI)
+				scale([0, 1000], [1, 2])
+				scale(2000, 3)
+				scaleVec(
+					[0, 1000],
+					[
+						{ x: 1, y: 1 },
+						{ x: 100, y: 100 },
+					]
+				)
+				scaleVec(2000, { x: 200, y: 200 })
+				additiveBlending([0, 3000])
+				flipHorizontal([0, 3000])
+				flipVertical([0, 3000])
 			})
 
-			trigger('HitSound', 5000, 10000, () => {
-				color(0, 1000, { r: 255, g: 255, b: 255 }, { r: 0, g: 0, b: 0 })
-				colorAtTime(2000, { r: 100, g: 100, b: 100 })
-				fade(0, 1000, 0, 1)
-				fadeAtTime(2000, 0.5)
-				move(0, 1000, { x: 0, y: 0 }, { x: 100, y: 100 })
-				moveAtTime(2000, { x: 200, y: 200 })
-				moveX(0, 1000, 0, 100)
-				moveXAtTime(2000, 200)
-				moveY(0, 1000, 0, 100)
-				moveYAtTime(2000, 200)
-				rotate(0, 1000, 0, Math.PI / 2)
-				rotateAtTime(2000, Math.PI)
-				scale(0, 1000, 1, 2)
-				scaleAtTime(2000, 3)
-				scaleVec(0, 1000, { x: 1, y: 1 }, { x: 100, y: 100 })
-				scaleVecAtTime(2000, { x: 200, y: 200 })
-				additiveBlending(0, 3000)
-				flipHorizontal(0, 3000)
-				flipVertical(0, 3000)
+			trigger([5000, 10000], 'HitSound', () => {
+				color(
+					[0, 1000],
+					[
+						{ r: 255, g: 255, b: 255 },
+						{ r: 0, g: 0, b: 0 },
+					]
+				)
+				color(2000, { r: 100, g: 100, b: 100 })
+				fade([0, 1000], [0, 1])
+				fade(2000, 0.5)
+				move(
+					[0, 1000],
+					[
+						{ x: 0, y: 0 },
+						{ x: 100, y: 100 },
+					]
+				)
+				move(2000, { x: 200, y: 200 })
+				moveX([0, 1000], [0, 100])
+				moveX(2000, 200)
+				moveY([0, 1000], [0, 100])
+				moveY(2000, 200)
+				rotate([0, 1000], [0, Math.PI / 2])
+				rotate(2000, Math.PI)
+				scale([0, 1000], [1, 2])
+				scale(2000, 3)
+				scaleVec(
+					[0, 1000],
+					[
+						{ x: 1, y: 1 },
+						{ x: 100, y: 100 },
+					]
+				)
+				scaleVec(2000, { x: 200, y: 200 })
+				additiveBlending([0, 3000])
+				flipHorizontal([0, 3000])
+				flipVertical([0, 3000])
 			})
 
 			expect(generateStoryboardOsb()).toBe(
@@ -182,8 +220,14 @@ describe('command', () => {
 		useContext(createContext())
 
 		const customExpression = () => {
-			fade(0, 1000, 0, 1)
-			move(0, 1000, { x: 0, y: 0 }, { x: 100, y: 100 })
+			fade([0, 1000], [0, 1])
+			move(
+				[0, 1000],
+				[
+					{ x: 0, y: 0 },
+					{ x: 100, y: 100 },
+				]
+			)
 		}
 
 		createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
