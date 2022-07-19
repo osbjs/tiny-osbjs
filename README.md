@@ -260,25 +260,23 @@ function colorAtTime(time: number, color: Color)
 ```
 The virtual light source colour on the object. The colours of the pixels on the object are determined subtractively.
 
-### parameter
+### flipHorizontal
 ```typescript
-function additiveBlending(startTime: number, endTime: number)
 function flipHorizontal(startTime: number, endTime: number)
-function flipVertical(startTime: number, endTime: number)
-// Not recommended
-function parameter(
-	startTime: number | Timestamp, 
-	endTime: number | Timestamp, 
-	parameter: Parameter, 
-	easing: Easing = Easing.Linear
-)
-enum Parameter {
-	FlipHorizontal = 'H',
-	FlipVertical = 'V',
-	AdditiveBlending = 'A',
-}
 ```
-Unlike the other commands, which can be seen as setting endpoints along continually-tracked values, the `parameter` command apply ONLY while they are active, i.e.,you can't put a command from timestamps 1000 to 2000 and expect the value to apply at time 3000, even if the object's other commands aren't finished by that point.
+Flip the image horizontally.
+
+### flipVertical
+```ts
+function flipVertical(startTime: number, endTime: number)
+```
+Flip the image vertically.
+
+### additiveBlending
+```ts
+function additiveBlending(startTime: number, endTime: number)
+```
+Use additive-colour blending instead of alpha-blending
 
 ### loop
 ```typescript
@@ -398,9 +396,15 @@ Self-explanatory.
 
 ### reportBuildTime
 ```ts
-function reportBuildTime(sb: () => void)
+function reportBuildTime(sb: (end: () => void) => void)
 ```
-Print to console how long it takes to generate the storyboard.
+Print to console how long it takes to generate the storyboard. Call `end()` once you have done everything.
+
+### interpolate
+```ts
+function interpolate(input: number, inputRange: [number, number], outputRange: [number, number], easing: Easing = Easing.Linear): number
+```
+Map a value from an input range to an output range. This will clamp the input if it's outside of the input range.
 
 ## Official plugins
 - [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effects.
