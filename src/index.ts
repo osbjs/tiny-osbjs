@@ -29,6 +29,7 @@ export { Time, Timestamp } from 'types/Timestamp'
 export { TriggerType } from 'types/TriggerType'
 export { Vector2 } from 'types/Vector2'
 export { degToRad, radToDeg } from 'utils/angle'
+export { interpolate } from 'utils/interpolate'
 export { randFloat, randInt } from 'utils/random'
 export { reportBuildTime } from 'utils/reportBuildTime'
 export {
