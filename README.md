@@ -477,7 +477,7 @@ Print to console how long it takes to generate the storyboard. Call `end()` once
 ```ts
 function interpolate(input: number, inputRange: [number, number], outputRange: [number, number], easing: Easing = Easing.Linear): number
 ```
-Map a value from an input range to an output range. This will clamp the input if it's outside of the input range.
+Map a value from an input range to an output range. This will clamp the result if the input is outside of the input range.
 
 ## Official plugins
 - [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effects.

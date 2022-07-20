@@ -2,7 +2,7 @@ import { Easing } from 'types/Easing'
 import { toEasingFn } from './easingFunctions'
 
 /**
- * Map a value from an input range to an output range. This will clamp the input if it's outside of the input range.
+ * Map a value from an input range to an output range. This will clamp the result if the input is outside of the input range.
  *
  * @param input input value to interpolate
  * @param inputRange range of values that you expect the input to assume
@@ -14,8 +14,8 @@ export function interpolate(input: number, inputRange: [number, number], outputR
 	const [outputMin, outputMax] = outputRange
 	const easingFn = toEasingFn(easing)
 
-	if (input < inputMin) return inputMin
-	if (input > inputMax) return inputMax
+	if (input < inputMin) return outputMin
+	if (input > inputMax) return outputMax
 	if (outputMin === outputMax) return outputMin
 
 	return easingFn((input - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin
