@@ -2,6 +2,7 @@ import { addObject, doesWarnEmptyObject, getObjects, isInvokingCommand, isInvoki
 import { isValidAnimationLoopType, isValidLayer, isValidOrigin, isValidVector2 } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 import { Layer } from 'types/Layer'
+import { Loop } from 'types/Loop'
 import { Origin } from 'types/Origin'
 import { Vector2 } from 'types/Vector2'
 
@@ -14,10 +15,8 @@ export type Animation = {
 	commands: (Command | ParameterCommand | LoopCommand | TriggerCommand)[]
 	frameCount: number
 	frameDelay: number
-	loopType: AnimationLoopType
+	loopType: Loop
 }
-
-export type AnimationLoopType = 'LoopForever' | 'LoopOnce'
 
 /**
  * Create a new Animation.
@@ -41,13 +40,13 @@ export function createAnimation(
 	initialPosition: Vector2,
 	frameCount: number,
 	frameDelay: number,
-	loopType: AnimationLoopType,
+	loopType: Loop,
 	invokeFunction: () => void
 ) {
 	if (typeof path !== 'string') throw new TypeError('Path must be a string.')
 	if (!isValidLayer(layer)) throw new TypeError(`${layer} is not a valid layer.`)
 	if (!isValidOrigin(origin)) throw new TypeError(`${origin} is not a valid origin.`)
-	if (!isValidVector2(initialPosition)) throw new TypeError('Initial position must be a Vector2.')
+	if (!isValidVector2(initialPosition)) throw new TypeError('Initial position must be a `Vector2`.')
 	if (typeof frameCount !== 'number') throw new TypeError('Frame count must be a number.')
 	if (typeof frameDelay !== 'number') throw new TypeError('Frame delay must be a number.')
 	if (!isValidAnimationLoopType(loopType)) throw new TypeError(`${loopType} is not a valid loop type.`)

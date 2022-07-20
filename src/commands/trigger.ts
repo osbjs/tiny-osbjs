@@ -1,8 +1,9 @@
 import { addCommandToCurrentObject, setIsInvokingTrigger } from 'context'
 import { isValidTriggerType } from 'isValidParams'
-import { tryParseTimestamp } from 'tryParseTimestamp'
-import { TriggerCommand, TriggerType } from 'types/Command'
-import { Timestamp } from 'types/Timestamp'
+import { TriggerCommand } from 'types/Command'
+import { TimePair } from 'types/CommandValue'
+import { Addition, SampleSet, TriggerType } from 'types/TriggerType'
+import { validateAndExtractTime } from './utils/extractCommandArguments'
 
 /**
  * Create a trigger group.
@@ -14,20 +15,14 @@ import { Timestamp } from 'types/Timestamp'
  * If they overlap any existing storyboarded events, they will not trigger until those transformations are no in effect.
  *
  * @param triggerType The trigger condition, see https://osu.ppy.sh/wiki/en/Storyboard/Scripting/Compound_Commands#trigger-(t)-command.
+ * You can use `makeTriggerType` helper if you are unsure about the syntax.
  * @param time [startTime, endTime] time in milliseconds/timestamp at which the trigger is valid.
  * @param invokeFunction The commands that should be run when the trigger group is created.
  */
-export function trigger(time: [number | Timestamp, number | Timestamp], triggerType: TriggerType, invokeFunction: () => void) {
+export function trigger(time: TimePair, triggerType: TriggerType, invokeFunction: () => void) {
 	if (!isValidTriggerType(triggerType)) throw new Error(`${triggerType} is not a valid trigger type.`)
 
-	let startTime: number, endTime: number
-
-	if (time instanceof Array) {
-		startTime = tryParseTimestamp(time[0])
-		endTime = tryParseTimestamp(time[1])
-	} else {
-		startTime = endTime = tryParseTimestamp(time)
-	}
+	const [startTime, endTime] = validateAndExtractTime(time)
 
 	addCommandToCurrentObject<TriggerCommand>({
 		__name__: 'Trigger',
@@ -40,4 +35,8 @@ export function trigger(time: [number | Timestamp, number | Timestamp], triggerT
 	setIsInvokingTrigger(true)
 	invokeFunction()
 	setIsInvokingTrigger(false)
+}
+
+export function makeTriggerType(sampleSet: SampleSet, additionsSampleSet: SampleSet, addition: Addition, customSampleSet?: number): TriggerType {
+	return `HitSound${sampleSet}${additionsSampleSet}${addition}${customSampleSet ?? ''}`
 }

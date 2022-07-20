@@ -6,21 +6,17 @@ import { createSample, SampleLayer } from 'createSample'
 import { createSprite } from 'createSprite'
 import { createVideo } from 'createVideo'
 import { generateStoryboardOsb } from 'generateStoryboardOsb'
+import { Layer, Origin } from 'index'
+import { Loop } from 'types/Loop'
 
 describe('create object', () => {
 	it('should be able to use a custom function component', () => {
 		useContext(createContext())
 
 		const customComponent = () => {
-			createSprite('test.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
-				fade([0, 1000], [0, 1])
-				move(
-					[0, 1000],
-					[
-						{ x: 0, y: 0 },
-						{ x: 100, y: 100 },
-					]
-				)
+			createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
+				fade([0, 1000], 0, 1)
+				move([0, 1000], [0, 0], [100, 100])
 			})
 		}
 
@@ -47,20 +43,20 @@ describe('create object', () => {
 		createBackground('test-bg.png')
 		createVideo('test-vid.mp4', 1000)
 
-		createSprite('test-sprite0.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {})
-		createAnimation('test-animation0.png', 'Background', 'Centre', { x: 320, y: 240 }, 3, 300, 'LoopForever', () => {})
+		createSprite('test-sprite0.png', Layer.Background, Origin.Centre, [320, 240], () => {})
+		createAnimation('test-animation0.png', Layer.Background, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
 
-		createSprite('test-sprite1.png', 'Fail', 'Centre', { x: 320, y: 240 }, () => {})
-		createAnimation('test-animation1.png', 'Fail', 'Centre', { x: 320, y: 240 }, 3, 300, 'LoopForever', () => {})
+		createSprite('test-sprite1.png', Layer.Fail, Origin.Centre, [320, 240], () => {})
+		createAnimation('test-animation1.png', Layer.Fail, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
 
-		createSprite('test-sprite2.png', 'Pass', 'Centre', { x: 320, y: 240 }, () => {})
-		createAnimation('test-animation2.png', 'Pass', 'Centre', { x: 320, y: 240 }, 3, 300, 'LoopForever', () => {})
+		createSprite('test-sprite2.png', Layer.Pass, Origin.Centre, [320, 240], () => {})
+		createAnimation('test-animation2.png', Layer.Pass, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
 
-		createSprite('test-sprite3.png', 'Foreground', 'Centre', { x: 320, y: 240 }, () => {})
-		createAnimation('test-animation3.png', 'Foreground', 'Centre', { x: 320, y: 240 }, 3, 300, 'LoopForever', () => {})
+		createSprite('test-sprite3.png', Layer.Foreground, Origin.Centre, [320, 240], () => {})
+		createAnimation('test-animation3.png', Layer.Foreground, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
 
-		createSprite('test-sprite4.png', 'Overlay', 'Centre', { x: 320, y: 240 }, () => {})
-		createAnimation('test-animation4.png', 'Overlay', 'Centre', { x: 320, y: 240 }, 3, 300, 'LoopForever', () => {})
+		createSprite('test-sprite4.png', Layer.Overlay, Origin.Centre, [320, 240], () => {})
+		createAnimation('test-animation4.png', Layer.Overlay, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
 
 		createSample(1000, SampleLayer.Background, 'test-sample.ogg', 100)
 

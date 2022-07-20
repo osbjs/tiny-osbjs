@@ -1,7 +1,6 @@
 import { isCommand, isLoopCommand, isParameterCommand, isTriggerCommand } from 'checkCommandType'
-import { Color } from 'types/Color'
+import { isValidColor, isValidVector2 } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
-import { Vector2 } from 'types/Vector2'
 
 export function getCommandsOsb(commands: (Command | ParameterCommand | LoopCommand | TriggerCommand)[], depth: 1 | 2 = 1): string {
 	return commands
@@ -19,33 +18,24 @@ export function getCommandsOsb(commands: (Command | ParameterCommand | LoopComma
 		.join('')
 }
 
-export function getCommandOsb({ type, startTime, endTime, startValue, endValue, easing }: Command, depth: 1 | 2): string {
-	function isValueVector2(value: number | Vector2 | Color): value is Vector2 {
-		return type === 'M' || type === 'V'
-	}
-
-	function isValueColor(value: number | Vector2 | Color): value is Color {
-		return type === 'C'
-	}
-
+export function getCommandOsb(command: Command, depth: 1 | 2): string {
+	const { type, startTime, endTime, startValue, endValue, easing } = command
 	const prefix = depth === 1 ? ' ' : '  '
 
-	if (isValueColor(startValue) && isValueColor(endValue)) {
-		const endValueStr =
-			startValue.r === endValue.r && startValue.g === endValue.g && startValue.b === endValue.b
-				? ''
-				: `,${endValue.r},${endValue.g},${endValue.b}`
+	if (isValidColor(startValue) && isValidColor(endValue)) {
+		const [startR, startG, startB] = startValue
+		const [endR, endG, endB] = endValue
 
-		return (
-			prefix +
-			[type, easing, startTime, endTime === startTime ? '' : endTime, startValue.r, startValue.g, startValue.b].join(',') +
-			endValueStr +
-			'\n'
-		)
-	} else if (isValueVector2(startValue) && isValueVector2(endValue)) {
-		const endValueStr = startValue.x === endValue.x && startValue.y === endValue.y ? '' : `,${endValue.x},${endValue.y}`
+		const endValueStr = startR === endR && startG === endG && startB === endB ? '' : `,${endR},${endG},${endB}`
 
-		return prefix + [type, easing, startTime, endTime === startTime ? '' : endTime, startValue.x, startValue.y].join(',') + endValueStr + '\n'
+		return prefix + [type, easing, startTime, endTime === startTime ? '' : endTime, startR, startG, startB].join(',') + endValueStr + '\n'
+	} else if (isValidVector2(startValue) && isValidVector2(endValue)) {
+		const [startX, startY] = startValue
+		const [endX, endY] = endValue
+
+		const endValueStr = startX === endX && startY === endY ? '' : `,${endX},${endY}`
+
+		return prefix + [type, easing, startTime, endTime === startTime ? '' : endTime, startX, startY].join(',') + endValueStr + '\n'
 	} else {
 		const endValueStr = startValue === endValue ? '' : `,${endValue}`
 

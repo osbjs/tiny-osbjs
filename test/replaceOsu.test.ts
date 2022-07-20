@@ -2,6 +2,7 @@ import { fade } from 'commands'
 import { createContext, useContext } from 'context'
 import { createSample, SampleLayer } from 'createSample'
 import { createSprite } from 'createSprite'
+import { Layer, Origin } from 'index'
 import { replaceOsuEvents } from 'replaceOsuEvents'
 
 it('replaces [Events] section in osu file', () => {
@@ -121,8 +122,8 @@ Sample,1000,0,"test-sample.ogg",100
 
 [HitObjects]`
 
-	createSprite('sprite.png', 'Background', 'Centre', { x: 320, y: 240 }, () => {
-		fade([0, 1000], [0, 1])
+	createSprite('sprite.png', Layer.Background, Origin.Centre, [320, 240], () => {
+		fade([0, 1000], 0, 1)
 	})
 
 	createSample(1000, SampleLayer.Background, 'test-sample.ogg', 100)

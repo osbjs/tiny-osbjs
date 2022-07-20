@@ -1,8 +1,8 @@
 import { addCommandToCurrentObject } from 'context'
-import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Parameter, ParameterCommand } from 'types/Command'
-import { TimeValue } from 'types/CommandValue'
+import { TimePair } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
+import { validateAndExtractTime } from './utils/extractCommandArguments'
 
 /**
  * Unlike the other commands, which can be seen as setting endpoints along continually-tracked values,
@@ -19,8 +19,8 @@ function parameter(startTime: number, endTime: number, parameter: Parameter) {
 		__name__: 'Parameter',
 		type: 'P',
 		easing: Easing.Linear,
-		startTime: tryParseTimestamp(startTime),
-		endTime: tryParseTimestamp(endTime),
+		startTime,
+		endTime,
 		parameter,
 	})
 }
@@ -30,15 +30,8 @@ function parameter(startTime: number, endTime: number, parameter: Parameter) {
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function additiveBlending(time: TimeValue) {
-	let startTime: number, endTime: number
-
-	if (time instanceof Array) {
-		startTime = tryParseTimestamp(time[0])
-		endTime = tryParseTimestamp(time[1])
-	} else {
-		startTime = endTime = tryParseTimestamp(time)
-	}
+export function additiveBlending(time: TimePair) {
+	const [startTime, endTime] = validateAndExtractTime(time)
 
 	parameter(startTime, endTime, Parameter.AdditiveBlending)
 }
@@ -48,15 +41,8 @@ export function additiveBlending(time: TimeValue) {
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function flipHorizontal(time: TimeValue) {
-	let startTime: number, endTime: number
-
-	if (time instanceof Array) {
-		startTime = tryParseTimestamp(time[0])
-		endTime = tryParseTimestamp(time[1])
-	} else {
-		startTime = endTime = tryParseTimestamp(time)
-	}
+export function flipHorizontal(time: TimePair) {
+	const [startTime, endTime] = validateAndExtractTime(time)
 
 	parameter(startTime, endTime, Parameter.FlipHorizontal)
 }
@@ -66,15 +52,8 @@ export function flipHorizontal(time: TimeValue) {
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function flipVertical(time: TimeValue) {
-	let startTime: number, endTime: number
-
-	if (time instanceof Array) {
-		startTime = tryParseTimestamp(time[0])
-		endTime = tryParseTimestamp(time[1])
-	} else {
-		startTime = endTime = tryParseTimestamp(time)
-	}
+export function flipVertical(time: TimePair) {
+	const [startTime, endTime] = validateAndExtractTime(time)
 
 	parameter(startTime, endTime, Parameter.FlipVertical)
 }

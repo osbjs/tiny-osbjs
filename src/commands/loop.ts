@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject, setIsInvokingLoop } from 'context'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { LoopCommand } from 'types/Command'
-import { Timestamp } from 'types/Timestamp'
+import { Time, Timestamp } from 'types/Timestamp'
 
 /**
  * Create a loop group.
@@ -15,7 +15,7 @@ import { Timestamp } from 'types/Timestamp'
  * @param count The number of times the loop executes before stopping.
  * @param invokeFunction The commands that should be run when the trigger group is created.
  */
-export function loop(startTime: number | Timestamp, count: number, invokeFunction: () => void) {
+export function loop(startTime: Time, count: number, invokeFunction: () => void) {
 	addCommandToCurrentObject<LoopCommand>({
 		__name__: 'Loop',
 		type: 'L',

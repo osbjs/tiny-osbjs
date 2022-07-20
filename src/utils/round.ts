@@ -8,16 +8,9 @@ export function round(x: number): number {
 }
 
 export function roundVec(v: Vector2): Vector2 {
-	return {
-		x: round(v.x),
-		y: round(v.y),
-	}
+	return [round(v[0]), round(v[1])]
 }
 
 export function roundColor(c: Color): Color {
-	return {
-		r: round(c.r),
-		g: round(c.g),
-		b: round(c.b),
-	}
+	return [round(c[0]), round(c[1]), round(c[2])]
 }

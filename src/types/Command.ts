@@ -1,5 +1,6 @@
 import { Color } from './Color'
 import { Easing } from './Easing'
+import { TriggerType } from './TriggerType'
 import { Vector2 } from './Vector2'
 
 export type Command = {
@@ -45,9 +46,3 @@ export type TriggerCommand = {
 	endTime: number
 	commands: (Command | ParameterCommand)[]
 }
-
-export type TriggerType = `HitSound${SampleSet}${AdditionsSampleSet}${Addition}${CustomSampleSet}`
-type SampleSet = '' | 'All' | 'Normal' | 'Soft' | 'Drum'
-type AdditionsSampleSet = SampleSet
-type Addition = '' | 'Whistle' | 'Finish' | 'Clap'
-type CustomSampleSet = number | ''
