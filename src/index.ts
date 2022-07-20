@@ -21,7 +21,6 @@ export {
 	isValidVector2,
 } from 'isValidParams'
 export { Color } from 'types/Color'
-export { Parameter } from 'types/Command'
 export { Easing } from 'types/Easing'
 export { Layer } from 'types/Layer'
 export { LoopType } from 'types/LoopType'

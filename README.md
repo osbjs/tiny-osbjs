@@ -123,6 +123,16 @@ fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 
 ### Common types
 ```ts
+type Color = [number, number, number]
+
+type Vector2 = [number, number]
+
+type Timestamp = `${number}:${number}:${number}`
+
+type Time = Timestamp | number
+
+type TimePair = [Time, Time]
+
 enum Layer {
 	Background = 'Background',
 	Foreground = 'Foreground',
