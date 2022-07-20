@@ -12,5 +12,5 @@ export function roundVec(v: Vector2): Vector2 {
 }
 
 export function roundColor(c: Color): Color {
-	return [round(c[0]), round(c[1]), round(c[2])]
+	return [Math.round(c[0]), Math.round(c[1]), Math.round(c[2])]
 }
