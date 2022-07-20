@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject } from 'context'
 import { Parameter, ParameterCommand } from 'types/Command'
-import { TimePair } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
+import { TimePair } from 'types/TimePair'
 import { validateAndExtractTime } from './utils/extractCommandArguments'
 
 /**

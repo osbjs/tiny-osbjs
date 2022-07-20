@@ -7,7 +7,7 @@ import { createSprite } from 'createSprite'
 import { createVideo } from 'createVideo'
 import { generateStoryboardOsb } from 'generateStoryboardOsb'
 import { Layer, Origin } from 'index'
-import { Loop } from 'types/Loop'
+import { LoopType } from 'types/LoopType'
 
 describe('create object', () => {
 	it('should be able to use a custom function component', () => {
@@ -44,19 +44,19 @@ describe('create object', () => {
 		createVideo('test-vid.mp4', 1000)
 
 		createSprite('test-sprite0.png', Layer.Background, Origin.Centre, [320, 240], () => {})
-		createAnimation('test-animation0.png', Layer.Background, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
+		createAnimation('test-animation0.png', Layer.Background, Origin.Centre, [320, 240], 3, 300, LoopType.Forever, () => {})
 
 		createSprite('test-sprite1.png', Layer.Fail, Origin.Centre, [320, 240], () => {})
-		createAnimation('test-animation1.png', Layer.Fail, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
+		createAnimation('test-animation1.png', Layer.Fail, Origin.Centre, [320, 240], 3, 300, LoopType.Forever, () => {})
 
 		createSprite('test-sprite2.png', Layer.Pass, Origin.Centre, [320, 240], () => {})
-		createAnimation('test-animation2.png', Layer.Pass, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
+		createAnimation('test-animation2.png', Layer.Pass, Origin.Centre, [320, 240], 3, 300, LoopType.Forever, () => {})
 
 		createSprite('test-sprite3.png', Layer.Foreground, Origin.Centre, [320, 240], () => {})
-		createAnimation('test-animation3.png', Layer.Foreground, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
+		createAnimation('test-animation3.png', Layer.Foreground, Origin.Centre, [320, 240], 3, 300, LoopType.Forever, () => {})
 
 		createSprite('test-sprite4.png', Layer.Overlay, Origin.Centre, [320, 240], () => {})
-		createAnimation('test-animation4.png', Layer.Overlay, Origin.Centre, [320, 240], 3, 300, Loop.Forever, () => {})
+		createAnimation('test-animation4.png', Layer.Overlay, Origin.Centre, [320, 240], 3, 300, LoopType.Forever, () => {})
 
 		createSample(1000, SampleLayer.Background, 'test-sample.ogg', 100)
 

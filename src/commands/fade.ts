@@ -1,9 +1,9 @@
 import { addCommandToCurrentObject } from 'context'
 import { Command } from 'types/Command'
-import { TimePair } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
+import { TimePair } from 'types/TimePair'
 import { Time } from 'types/Timestamp'
-import { defaultEasingIfUndefined, validateNumericArguments, validateAndExtractTime } from './utils/extractCommandArguments'
+import { defaultEasingIfUndefined, validateAndExtractTime, validateNumericArguments } from './utils/extractCommandArguments'
 
 /**
  * Change the opacity of the object.

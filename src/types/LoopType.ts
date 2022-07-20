@@ -1,4 +1,4 @@
-export enum Loop {
+export enum LoopType {
 	Forever = 'LoopForever',
 	Once = 'LoopOnce',
 }

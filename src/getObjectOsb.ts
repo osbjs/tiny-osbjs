@@ -6,14 +6,14 @@ import { Video } from 'createVideo'
 import { getCommandsOsb } from 'getCommandOsb'
 
 export function getSpriteOsb({ type, layer, origin, path, initialPosition, commands }: Sprite): string {
-	return [type, layer, origin, `"${path}"`, initialPosition.x, initialPosition.y].join(',').concat('\n').concat(getCommandsOsb(commands))
+	const [x, y] = initialPosition
+	return [type, layer, origin, `"${path}"`, x, y].join(',').concat('\n').concat(getCommandsOsb(commands))
 }
 
 export function getAnimationOsb({ type, layer, origin, path, initialPosition, commands, frameCount, frameDelay, loopType }: Animation): string {
-	return [type, layer, origin, `"${path}"`, initialPosition.x, initialPosition.y, frameCount, frameDelay, loopType]
-		.join(',')
-		.concat('\n')
-		.concat(getCommandsOsb(commands))
+	const [x, y] = initialPosition
+
+	return [type, layer, origin, `"${path}"`, x, y, frameCount, frameDelay, loopType].join(',').concat('\n').concat(getCommandsOsb(commands))
 }
 
 export function getSampleOsb({ type, layer, path, volume, startTime }: Sample): string {

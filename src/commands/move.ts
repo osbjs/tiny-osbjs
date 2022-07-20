@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject } from 'context'
 import { Command } from 'types/Command'
-import { TimePair } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
+import { TimePair } from 'types/TimePair'
 import { Time } from 'types/Timestamp'
 import { Vector2 } from 'types/Vector2'
 import { defaultEasingIfUndefined, validateAndExtractTime, validateVector2Arguments } from './utils/extractCommandArguments'

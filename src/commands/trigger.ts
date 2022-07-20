@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject, setIsInvokingTrigger } from 'context'
 import { isValidTriggerType } from 'isValidParams'
 import { TriggerCommand } from 'types/Command'
-import { TimePair } from 'types/CommandValue'
+import { TimePair } from 'types/TimePair'
 import { Addition, SampleSet, TriggerType } from 'types/TriggerType'
 import { validateAndExtractTime } from './utils/extractCommandArguments'
 
@@ -37,6 +37,13 @@ export function trigger(time: TimePair, triggerType: TriggerType, invokeFunction
 	setIsInvokingTrigger(false)
 }
 
+/**
+ * Helper to create `TriggerType`
+ * @param sampleSet All / Normal / Soft / Drum
+ * @param additionsSampleSet All / Normal / Soft / Drum
+ * @param addition Whistle / Finish / Clap
+ * @param customSampleSet Custom sample number
+ */
 export function makeTriggerType(sampleSet: SampleSet, additionsSampleSet: SampleSet, addition: Addition, customSampleSet?: number): TriggerType {
 	return `HitSound${sampleSet}${additionsSampleSet}${addition}${customSampleSet ?? ''}`
 }

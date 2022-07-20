@@ -2,7 +2,7 @@ import { addObject, doesWarnEmptyObject, getObjects, isInvokingCommand, isInvoki
 import { isValidAnimationLoopType, isValidLayer, isValidOrigin, isValidVector2 } from 'isValidParams'
 import { Command, LoopCommand, ParameterCommand, TriggerCommand } from 'types/Command'
 import { Layer } from 'types/Layer'
-import { Loop } from 'types/Loop'
+import { LoopType } from 'types/LoopType'
 import { Origin } from 'types/Origin'
 import { Vector2 } from 'types/Vector2'
 
@@ -15,7 +15,7 @@ export type Animation = {
 	commands: (Command | ParameterCommand | LoopCommand | TriggerCommand)[]
 	frameCount: number
 	frameDelay: number
-	loopType: Loop
+	loopType: LoopType
 }
 
 /**
@@ -40,7 +40,7 @@ export function createAnimation(
 	initialPosition: Vector2,
 	frameCount: number,
 	frameDelay: number,
-	loopType: Loop,
+	loopType: LoopType,
 	invokeFunction: () => void
 ) {
 	if (typeof path !== 'string') throw new TypeError('Path must be a string.')

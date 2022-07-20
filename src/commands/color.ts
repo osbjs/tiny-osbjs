@@ -1,8 +1,8 @@
 import { addCommandToCurrentObject } from 'context'
 import { Color } from 'types/Color'
 import { Command } from 'types/Command'
-import { TimePair } from 'types/CommandValue'
 import { Easing } from 'types/Easing'
+import { TimePair } from 'types/TimePair'
 import { Time } from 'types/Timestamp'
 import { defaultEasingIfUndefined, validateAndExtractTime, validateColorArguments } from './utils/extractCommandArguments'
 
