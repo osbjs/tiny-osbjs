@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject, setIsInvokingLoop } from 'context'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { LoopCommand } from 'types/Command'
-import { Time, Timestamp } from 'types/Timestamp'
+import { Time } from 'types/Timestamp'
 
 /**
  * Create a loop group.
