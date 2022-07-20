@@ -123,10 +123,13 @@ fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 
 ### Common types
 ```ts
+// [r, g, b] respectively
 type Color = [number, number, number]
 
+// [x, y] respectively
 type Vector2 = [number, number]
 
+// ex: 01:29:345
 type Timestamp = `${number}:${number}:${number}`
 
 type Time = Timestamp | number
