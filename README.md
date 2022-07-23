@@ -119,6 +119,8 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 ```
 
+If you ran into any issues or need help, contact Nanachi#1381 on discord. 
+
 ## API documentation
 
 ### Common types
