@@ -33,7 +33,7 @@ Then add this script to your package.json:
 
 ## Usage
 Before you do anything, you have to create a storyboard context and tell the library to use it. This context is shared accross the whole project. 
-```javascript
+```js
 const { createContext, useContext } = require('@osbjs/tiny-osbjs')
 
 const context = createContext()
@@ -41,14 +41,14 @@ useContext(context)
 ```
 
 Then you can start creating storyboard objects.
-```javascript
+```js
 const { createSprite, Layer, Origin } = require('tiny-osbjs')
 
 createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {})
 ```
 
 If you want to create a storyboard for each difficulty, you must specify the context at the entry point of each storyboard.
-```javascript
+```js
 // difficulty1.js
 const { createContext, useContext } = require('@osbjs/tiny-osbjs')
 
@@ -77,7 +77,7 @@ commandName(time, value)
 ```
 
 The killer-feature of `tiny-osb` is that you can specify the commands in a declarative way and the library will know which objects they are refering to.
-```javascript
+```js
 const { createSprite, Layer, Origin, fade, loop } = require('@osbjs/tiny-osbjs')
 
 createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
@@ -90,7 +90,7 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 ```
 
 You can pass osu timestamp to the start time/end time of the command and the library will try to parse it.
-```javascript
+```js
 const { createSprite, Layer, Origin, fade, loop } = require('@osbjs/tiny-osbjs')
 
 createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
@@ -99,7 +99,7 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 ```
 
 Finally, you can generate osb string of the storyboard. You can use that string to export to osb file.
-```javascript
+```js
 const { generateStoryboardOsb } = require('@osbjs/tiny-osbjs')
 
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
