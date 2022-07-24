@@ -35,7 +35,7 @@ export function isValidParameter(parameter: any): parameter is Parameter {
 }
 
 export function isValidColor(color: any): color is Color {
-	return Array.isArray(color) && color.length == 3 && color.every((v) => typeof v == 'number')
+	return Array.isArray(color) && color.length == 3 && color.every((v) => typeof v == 'number' && v <= 255 && v >= 0)
 }
 
 export function isValidEasing(easing: any): easing is Easing {
