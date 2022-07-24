@@ -21,15 +21,15 @@ function hashCode(str: string) {
 	return hash
 }
 
-function random(seed: number | string | null): number {
+function random(seed: number | string | undefined): number {
 	if (typeof seed === 'string') {
 		return mulberry32(hashCode(seed))
 	} else if (typeof seed === 'number') {
 		return mulberry32(seed * 10000000000)
-	} else if (seed === null) {
+	} else if (seed === undefined) {
 		return Math.random()
 	} else {
-		throw new Error('Random seed must either be a number, string or null.')
+		throw new Error('Random seed must either be a number, string or undefined.')
 	}
 }
 
@@ -37,9 +37,9 @@ function random(seed: number | string | null): number {
  * Random integer in the interval [min, max].
  * @param min Min value.
  * @param max Max value
- * @param seed Random seed. The same seed will always return the same value. Pass in null if you want a true random value.
+ * @param seed Random seed. The same seed will always return the same value. Leaving it empty will result in a true random value.
  */
-export function randInt(min: number, max: number, seed: number | string | null = 'default') {
+export function randInt(min: number, max: number, seed?: number | string) {
 	return min + Math.floor(random(seed) * (max - min))
 }
 
@@ -47,8 +47,8 @@ export function randInt(min: number, max: number, seed: number | string | null =
  * Random float in the interval [min, max].
  * @param min Min value.
  * @param max Max value
- * @param seed Random seed. The same seed will always return the same value. Pass in null if you want a true random value.
+ * @param seed Random seed. The same seed will always return the same value. Leaving it empty will result in a true random value.
  */
-export function randFloat(min: number, max: number, seed: number | string | null = 'default') {
+export function randFloat(min: number, max: number, seed?: number | string) {
 	return min + random(seed) * (max - min)
 }

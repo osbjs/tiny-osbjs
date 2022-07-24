@@ -411,16 +411,16 @@ Convert radians to degrees.
 
 ### Random
 ```ts
-function randInt(min: number, max: number, seed: number | string | null = 'default')
+function randInt(min: number, max: number, seed?: number | string)
 ```
 Random integer in the interval [min, max].
 
 ```ts
-function randFloat(min: number, max: number, seed: number | string | null = 'default')
+function randFloat(min: number, max: number, seed?: number | string)
 ```
 Random float in the interval [min, max].
 
-Note that the same seed will always return the same value. Pass in null if you want a true random value.
+Note that the same seed will always return the same value. Leaving it empty will result in a true random value.
 
 ### Vector math
 ```ts
