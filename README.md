@@ -491,6 +491,20 @@ function interpolate(input: number, inputRange: [number, number], outputRange: [
 ```
 Map a value from an input range to an output range. This will clamp the result if the input is outside of the input range.
 
+### hexToRgb
+```ts
+function hexToRgb(hex: string): Color
+```
+Convert hex color code to RGB color.
+
+### Default pallete
+You can use the `DefaultPallete` constant to access the predefined colors if you are not sure which colors to use.
+All colors are picked up from [here](https://www.w3.org/TR/css-color-3/#svg-color).
+
+```ts
+const DefaultPallete: { [key: string]: Color }
+```
+
 ## Official plugins
 - [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effects.
 - [@osbjs/hitobjects-tiny-osbjs](https://github.com/osbjs/hitobjects-tiny-osbjs) - Get hit objects position used to create highlight effects.
