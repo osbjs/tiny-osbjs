@@ -52,24 +52,32 @@ If you want to create a storyboard for each difficulty, you must specify the con
 // difficulty1.js
 const { createContext, useContext } = require('@osbjs/tiny-osbjs')
 
-function difficulty1Storyboard() {
+module.exports = function difficulty1Storyboard() {
 	const context = createContext()
 	useContext(context)
 
 	// createSprite...
 }
-function difficulty2Storyboard() {
+
+// difficulty2.js
+const { createContext, useContext } = require('@osbjs/tiny-osbjs')
+
+module.exports = function difficulty2Storyboard() {
 	const context = createContext()
 	useContext(context)
 
 	// createSprite...
 }
+
+// index.js
+const difficulty1 = require('./difficulty1.js')
+const difficulty2 = require('./difficulty2.js')
 
 difficulty1Storyboard()
 difficulty2Storyboard()
 ```
 
-Most of the commands will have their syntax look like this (except for a few special commands):
+Most of the commands will have their syntax looking like this (except for a few special commands):
 ```ts
 commandName([startTime, endTime], startValue, endValue, easing)
 commandName([startTime, endTime], value)
@@ -118,6 +126,8 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 ```
+
+If you ran into any issues or need help, contact Nanachi#1381 on discord. 
 
 ## API documentation
 
