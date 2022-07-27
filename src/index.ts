@@ -31,6 +31,7 @@ export { Vector2 } from 'types/Vector2'
 export { degToRad, radToDeg } from 'utils/angle'
 export { DefaultPallete } from 'utils/DefaultPallete'
 export { hexToRgb } from 'utils/hexToRgb'
+export { HideBg } from 'utils/HideBg'
 export { interpolate } from 'utils/interpolate'
 export { randFloat, randInt } from 'utils/random'
 export { reportBuildTime } from 'utils/reportBuildTime'
@@ -45,5 +46,6 @@ export {
 	lengthVec,
 	mulVec,
 	mulVecScalar,
+	normalizeVec,
 	subVec,
 } from 'utils/vectorMath'

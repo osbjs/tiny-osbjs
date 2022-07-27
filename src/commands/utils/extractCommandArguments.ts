@@ -25,15 +25,15 @@ export function validateColorArguments(startValue: Color, endValue: Color): [Col
 }
 
 export function validateVector2Arguments(startValue: Vector2, endValue: Vector2, parameterName: string): [Vector2, Vector2] {
-	if (!isValidVector2(startValue)) throw new Error('`start' + parameterName + '` must be a valid `Vector2` array.')
-	if (!isValidVector2(endValue)) throw new Error('`end' + parameterName + '` must be a valid `Vector2` array.')
+	if (!isValidVector2(startValue)) throw new TypeError('`start' + parameterName + '` must be a valid `Vector2` array.')
+	if (!isValidVector2(endValue)) throw new TypeError('`end' + parameterName + '` must be a valid `Vector2` array.')
 
 	return [roundVec(startValue), roundVec(endValue)]
 }
 
 export function validateNumericArguments(startValue: number, endValue: number, parameterName: string): [number, number] {
-	if (typeof startValue != 'number') throw new Error('`start' + parameterName + '` must be a number.')
-	if (typeof endValue != 'number') throw new Error('`end' + parameterName + '` must be a number.')
+	if (typeof startValue != 'number') throw new TypeError('`start' + parameterName + '` must be a number.')
+	if (typeof endValue != 'number') throw new TypeError('`end' + parameterName + '` must be a number.')
 
 	return [round(startValue), round(endValue)]
 }

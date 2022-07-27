@@ -166,6 +166,7 @@ enum Origin {
 	BottomRight = 'BottomRight',
 }
 
+// see https://easings.net/en
 enum Easing {
 	Linear,
 	Out,
@@ -473,7 +474,11 @@ function areEqualVecs(v1: Vector2, v2: Vector2): boolean
 ```
 Check if 2 vectors are equals.
 
-### cloneVec
+```ts
+function normalizeVec(v: Vector2): Vector2
+```
+Return a vector with the same direction but its length equals 1.
+
 ```ts
 function cloneVec(v: Vector2): Vector2
 ```
@@ -504,6 +509,14 @@ All colors are picked up from [here](https://www.w3.org/TR/css-color-3/#svg-colo
 ```ts
 const DefaultPallete: { [key: string]: Color }
 ```
+
+
+
+### HideBg
+```ts
+function HideBg(path: string)
+```
+Hide the background image.
 
 ## Official plugins
 - [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effects.
