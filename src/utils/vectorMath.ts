@@ -43,3 +43,7 @@ export function areEqualVecs(v1: Vector2, v2: Vector2): boolean {
 export function cloneVec(v: Vector2): Vector2 {
 	return [v[0], v[1]]
 }
+
+export function normalizeVec(v: Vector2): Vector2 {
+	return mulVecScalar(v, 1 / lengthVec(v))
+}
