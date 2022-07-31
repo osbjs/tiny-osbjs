@@ -32,46 +32,48 @@ Then add this script to your package.json:
 `index.js` (`index.ts`) is the entry point to your storyboard. This way when you run `npm start` it will automatically rebuild your storyboard when you change your code.
 
 ## Usage
+>Note: The example below will be written in TypeScript/ES Module syntax.
+
 Before you do anything, you have to create a storyboard context and tell the library to use it. This context is shared accross the whole project. 
-```js
-const { createContext, useContext } = require('@osbjs/tiny-osbjs')
+```ts
+import { createContext, useContext } from '@osbjs/tiny-osbjs'
 
 const context = createContext()
 useContext(context)
 ```
 
 Then you can start creating storyboard objects.
-```js
-const { createSprite, Layer, Origin } = require('tiny-osbjs')
+```ts
+import { createSprite, Layer, Origin } from 'tiny-osbjs'
 
 createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {})
 ```
 
 If you want to create a storyboard for each difficulty, you must specify the context at the entry point of each storyboard.
-```js
-// difficulty1.js
-const { createContext, useContext } = require('@osbjs/tiny-osbjs')
+```ts
+// difficulty1.ts
+import { createContext, useContext } from '@osbjs/tiny-osbjs'
 
-module.exports = function difficulty1Storyboard() {
+export default function difficulty1Storyboard() {
 	const context = createContext()
 	useContext(context)
 
 	// createSprite...
 }
 
-// difficulty2.js
-const { createContext, useContext } = require('@osbjs/tiny-osbjs')
+// difficulty2.ts
+import { createContext, useContext } from '@osbjs/tiny-osbjs'
 
-module.exports = function difficulty2Storyboard() {
+export default function Difficulty2() {
 	const context = createContext()
 	useContext(context)
 
 	// createSprite...
 }
 
-// index.js
-const difficulty1 = require('./difficulty1.js')
-const difficulty2 = require('./difficulty2.js')
+// index.ts
+import Difficulty1 from './difficulty1'
+import Difficulty2 from './difficulty2'
 
 difficulty1Storyboard()
 difficulty2Storyboard()
@@ -79,14 +81,14 @@ difficulty2Storyboard()
 
 Most of the commands will have their syntax looking like this (except for a few special commands):
 ```ts
-commandName([startTime, endTime], startValue, endValue, easing)
-commandName([startTime, endTime], value)
-commandName(time, value)
+commandName([startTime, endTime], startValue, endValue, easing) // commands that change overtime
+commandName([startTime, endTime], value) // commands that are only effective in a specific duration
+commandName(time, value) // commands that only need to be set once
 ```
 
-The killer-feature of `tiny-osb` is that you can specify the commands in a declarative way and the library will know which objects they are refering to.
-```js
-const { createSprite, Layer, Origin, fade, loop } = require('@osbjs/tiny-osbjs')
+The killer-feature of `tiny-osbjs` is that you can specify the commands in a declarative way and the library will know which objects they are refering to.
+```ts
+import { createSprite, Layer, Origin, fade, loop } from '@osbjs/tiny-osbjs'
 
 createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 	fade([0, 1000], 0, 1, Easing.Out) // refers to sprite
@@ -98,8 +100,8 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 ```
 
 You can pass osu timestamp to the start time/end time of the command and the library will try to parse it.
-```js
-const { createSprite, Layer, Origin, fade, loop } = require('@osbjs/tiny-osbjs')
+```ts
+import { createSprite, Layer, Origin, fade, loop } from '@osbjs/tiny-osbjs'
 
 createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 	fade([0, "00:00:015"], 0, 1) // this works
@@ -107,15 +109,17 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 ```
 
 Finally, you can generate osb string of the storyboard. You can use that string to export to osb file.
-```js
-const { generateStoryboardOsb } = require('@osbjs/tiny-osbjs')
+```ts
+import { generateStoryboardOsb } from '@osbjs/tiny-osbjs'
+import fs from 'fs'
 
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 ```
 
 Your final storyboard will look like this:
 ```js
-const { createContext, createSprite, fade, generateStoryboardOsb, Layer, Origin, useContext } = require('@osbjs/tiny-osbjs')
+import { createContext, createSprite, fade, generateStoryboardOsb, Layer, Origin, useContext } from '@osbjs/tiny-osbjs'
+import fs from 'fs'
 
 const context = createContext()
 useContext(context)
@@ -127,7 +131,7 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 ```
 
-If you ran into any issues or need help, contact Nanachi#1381 on discord. 
+If you ran into any issues or need help, contact `Nanachi#1381` on discord. 
 
 ## API documentation
 
@@ -516,9 +520,9 @@ const DefaultPallete: { [key: string]: Color }
 ```ts
 function HideBg(path: string)
 ```
-Hide the background image.
+Hide the background image. This is a *component* so you need to call this after you have specified the storyboard context with `useContext`.
 
 ## Official plugins
-- [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effects.
-- [@osbjs/hitobjects-tiny-osbjs](https://github.com/osbjs/hitobjects-tiny-osbjs) - Get hit objects position used to create highlight effects.
+- [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effect.
+- [@osbjs/hitobjects-tiny-osbjs](https://github.com/osbjs/hitobjects-tiny-osbjs) - Get hit objects position used to create highlight effect.
 - [@osbjs/txtgen-tiny-osbjs](https://github.com/osbjs/txtgen-tiny-osbjs) - Generate text images, commonly used for creating lyrics.
