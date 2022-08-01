@@ -11,6 +11,7 @@ The recommended way to create a storyboard project is using `create-tiny-sb`:
 ```bash
 npm create tiny-sb
 ```
+It also comes with some prebuilt components!
 
 ## Setup your project manually
 It's strongly recommended to use `TypeScript` and a text editor/IDE with good `TypeScript` support like `VSCode` for better developing experience.
