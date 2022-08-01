@@ -6,7 +6,13 @@ A declarative osu! storyboard library with zero dependencies and zero configurat
 npm install @osbjs/tiny-osbjs@latest
 ```
 
-## Setup your project
+## Bootstrap your project using `create-tiny-sb`
+The recommended way to create a storyboard project is using `create-tiny-sb`:
+```bash
+npm create tiny-sb
+```
+
+## Setup your project manually
 It's strongly recommended to use `TypeScript` and a text editor/IDE with good `TypeScript` support like `VSCode` for better developing experience.
 ```bash
 npm install -D typescript
