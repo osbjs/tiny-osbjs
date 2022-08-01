@@ -115,7 +115,24 @@ createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
 })
 ```
 
-Finally, you can generate osb string of the storyboard. You can use that string to export to osb file.
+Even though it isn't enforced, you should split your storyboard into multiple *components*.
+```ts
+// components/Background.ts
+import { createSprite, fade, Layer, Origin } from '@osbjs/tiny-osbjs'
+
+export default function Background(startTime: number, endTime: number) {
+	createSprite('bg.jpg', Layer.Background, Origin.Centre, [320, 240], () => {
+		fade([startTime, endTime], 1)
+	})
+}
+
+// index.ts
+import { Background } from './components/Background'
+
+Background(0, 30000)
+```
+
+Finally, you can generate osb string of the storyboard. You can use that string to export to your osb file.
 ```ts
 import { generateStoryboardOsb } from '@osbjs/tiny-osbjs'
 import fs from 'fs'
@@ -125,15 +142,24 @@ fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 
 Your final storyboard will look like this:
 ```js
-import { createContext, createSprite, fade, generateStoryboardOsb, Layer, Origin, useContext } from '@osbjs/tiny-osbjs'
+// components/Background.ts
+import { createSprite, fade, Layer, Origin } from '@osbjs/tiny-osbjs'
+
+export default function Background(startTime: number, endTime: number) {
+	createSprite('bg.jpg', Layer.Background, Origin.Centre, [320, 240], () => {
+		fade([startTime, endTime], 1)
+	})
+}
+
+// index.ts
+import { createContext, generateStoryboardOsb, useContext } from '@osbjs/tiny-osbjs'
 import fs from 'fs'
+import { Background } from './components/Background'
 
 const context = createContext()
 useContext(context)
 
-createSprite('test.png', Layer.Background, Origin.Centre, [320, 240], () => {
-	fade([0, 1000], 0, 1)
-})
+Background(0, 30000)
 
 fs.writeFileSync('Artist - Song (Creator).osb', generateStoryboardOsb(), 'utf8')
 ```
