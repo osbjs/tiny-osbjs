@@ -42,6 +42,7 @@ export {
 	cloneVec,
 	crossVec,
 	dotVec,
+	interpolateVec,
 	lengthSqrVec,
 	lengthVec,
 	mulVec,
