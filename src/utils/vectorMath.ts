@@ -47,3 +47,7 @@ export function cloneVec(v: Vector2): Vector2 {
 export function normalizeVec(v: Vector2): Vector2 {
 	return mulVecScalar(v, 1 / lengthVec(v))
 }
+
+export function interpolateVec(v1: Vector2, v2: Vector2, alpha: number): Vector2 {
+	return [v1[0] + (v2[0] - v1[0]) * alpha, v1[1] + (v2[1] - v1[1]) * alpha]
+}

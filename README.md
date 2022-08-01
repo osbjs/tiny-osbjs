@@ -488,6 +488,11 @@ function cloneVec(v: Vector2): Vector2
 ```
 Return a new Vector with the same x and y with the specified vector.
 
+```ts
+function interpolateVec(v1: Vector2, v2: Vector2, alpha: number): Vector2
+```
+Performs a linear interpolation between two vectors based on the given weighting, alpha = 0 will be v1 and alpha = 1 will be v2.
+
 ### reportBuildTime
 ```ts
 function reportBuildTime(sb: (end: () => void) => void)
