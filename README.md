@@ -127,7 +127,7 @@ export default function Background(startTime: number, endTime: number) {
 }
 
 // index.ts
-import { Background } from './components/Background'
+import Background from './components/Background'
 
 Background(0, 30000)
 ```
@@ -154,7 +154,7 @@ export default function Background(startTime: number, endTime: number) {
 // index.ts
 import { createContext, generateStoryboardOsb, useContext } from '@osbjs/tiny-osbjs'
 import fs from 'fs'
-import { Background } from './components/Background'
+import Background from './components/Background'
 
 const context = createContext()
 useContext(context)
