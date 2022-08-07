@@ -552,13 +552,23 @@ All colors are picked up from [here](https://www.w3.org/TR/css-color-3/#svg-colo
 const DefaultPallete: { [key: string]: Color }
 ```
 
-
-
 ### HideBg
 ```ts
 function HideBg(path: string)
 ```
 Hide the background image. This is a *component* so you need to call this after you have specified the storyboard context with `useContext`.
+
+### Dimensions
+```ts
+const WIDTH = 854
+const HEIGHT = 480
+const LEGACY_WIDTH = 640
+const MIN_X = -107
+const MAX_X = 747
+const MIN_Y = 0
+const MAX_Y = 480
+```
+A few constants you can use to get the storyboard dimensions quickly.
 
 ## Official plugins
 - [@osbjs/spectrum-tiny-osbjs](https://github.com/osbjs/spectrum-tiny-osbjs) - Get spectrum data used to create spectrum effect.
