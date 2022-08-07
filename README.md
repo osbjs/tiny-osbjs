@@ -127,12 +127,12 @@ export default function Background(startTime: number, endTime: number) {
 }
 
 // index.ts
-import { Background } from './components/Background'
+import Background from './components/Background'
 
 Background(0, 30000)
 ```
 
-Finally, you can generate osb string of the storyboard. You can use that string to export to your osb file.
+Finally, you can generate the osb string of the storyboard. You can use that string to write to your osb file.
 ```ts
 import { generateStoryboardOsb } from '@osbjs/tiny-osbjs'
 import fs from 'fs'
@@ -154,7 +154,7 @@ export default function Background(startTime: number, endTime: number) {
 // index.ts
 import { createContext, generateStoryboardOsb, useContext } from '@osbjs/tiny-osbjs'
 import fs from 'fs'
-import { Background } from './components/Background'
+import Background from './components/Background'
 
 const context = createContext()
 useContext(context)
