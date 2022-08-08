@@ -33,7 +33,7 @@ Then add this script to your package.json:
 ```json
 ...
 "scripts": {
-	"start": "node-dev index.js" // or "node-dev index.ts" if you are using TypeScript
+	"start": "node-dev index.js --respawn --clear --notify=false" // or "node-dev index.ts --respawn --clear --notify=false" if you are using TypeScript
 }
 ```
 `index.js` (`index.ts`) is the entry point to your storyboard. This way when you run `npm start` it will automatically rebuild your storyboard when you change your code.
