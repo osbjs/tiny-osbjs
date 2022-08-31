@@ -183,8 +183,10 @@ type Timestamp = `${number}:${number}:${number}`
 
 type Time = Timestamp | number
 
-type TimePair = [Time, Time]
+// represent start time/end time
+type TimeRange = [Time, Time]
 
+// osu storyboard layer
 enum Layer {
 	Background = 'Background',
 	Foreground = 'Foreground',
@@ -193,6 +195,7 @@ enum Layer {
 	Overlay = 'Overlay',
 }
 
+// origin of the sprite/animation
 enum Origin {
 	TopLeft = 'TopLeft',
 	TopCentre = 'TopCentre',
@@ -335,67 +338,67 @@ Returns .osu file after replacing \[Events\] section with events generated from 
 
 ### color
 ```typescript
-function color(time: Time | TimePair, startColor: Color, endColor: Color = startColor, easing?: Easing)
+function color(time: Time | TimeRange, startColor: Color, endColor: Color = startColor, easing?: Easing)
 ```
 The virtual light source colour on the object. The colours of the pixels on the object are determined subtractively.
 
 ### fade
 ```typescript
-function fade(time: Time | TimePair, startOpacity: number, endOpacity: number = startOpacity, easing?: Easing)
+function fade(time: Time | TimeRange, startOpacity: number, endOpacity: number = startOpacity, easing?: Easing)
 ```
 Change the opacity of the object.
 
 ### move
 ```typescript
-function move(time: Time | TimePair, startPosition: Vector2, endPosition: Vector2 = startPosition, easing?: Easing)
+function move(time: Time | TimeRange, startPosition: Vector2, endPosition: Vector2 = startPosition, easing?: Easing)
 ```
 Change the location of the object in the play area.
 
 ### moveX
 ```typescript
-function moveX(time: Time | TimePair, startX: number, endX: number = startX, easing?: Easing)
+function moveX(time: Time | TimeRange, startX: number, endX: number = startX, easing?: Easing)
 ```
 Change the x coordinate of the object.
 
 ### moveY
 ```typescript
-function moveY(time: Time | TimePair, startY: number, endY: number = startY, easing?: Easing)
+function moveY(time: Time | TimeRange, startY: number, endY: number = startY, easing?: Easing)
 ```
 Change the y coordinate of the object.
 
 ### rotate
 ```typescript
-function rotate(time: Time | TimePair, startAngle: number, endAngle: number = startAngle, easing?: Easing)
+function rotate(time: Time | TimeRange, startAngle: number, endAngle: number = startAngle, easing?: Easing)
 ```
 Change the amount an object is rotated from its original image, in radians, clockwise.
 
 ### scale
 ```typescript
-function scale(time: Time | TimePair, startScaleFactor: number, endScaleFactor: number = startScaleFactor, easing?: Easing)
+function scale(time: Time | TimeRange, startScaleFactor: number, endScaleFactor: number = startScaleFactor, easing?: Easing)
 ```
 Change the size of the object relative to its original size.
 
 ### scaleVec
 ```typescript
-function scaleVec(time: Time | TimePair, startScaleVector: Vector2, endScaleVector: Vector2 = startScaleVector, easing?: Easing)
+function scaleVec(time: Time | TimeRange, startScaleVector: Vector2, endScaleVector: Vector2 = startScaleVector, easing?: Easing)
 ```
 Change the size of the object relative to its original size, but X and Y scale separately.
 
 ### flipHorizontal
 ```typescript
-function flipHorizontal(time: TimePair)
+function flipHorizontal(time: TimeRange)
 ```
 Flip the image horizontally.
 
 ### flipVertical
 ```ts
-function flipVertical(time: TimePair)
+function flipVertical(time: TimeRange)
 ```
 Flip the image vertically.
 
 ### additiveBlending
 ```ts
-function additiveBlending(time: TimePair)
+function additiveBlending(time: TimeRange)
 ```
 Use additive-colour blending instead of alpha-blending
 
@@ -409,7 +412,7 @@ Loops can be defined to repeat a set of events constantly for a set number of it
 
 ### trigger
 ```typescript
-function trigger(time: TimePair, triggerType: TriggerType, invokeFunction: () => void)
+function trigger(time: TimeRange, triggerType: TriggerType, invokeFunction: () => void)
 
 type TriggerType = `HitSound${SampleSet}${SampleSet}${Addition}${number | ''}`
 

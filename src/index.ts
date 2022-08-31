@@ -16,7 +16,7 @@ export {
 	isValidOrigin,
 	isValidParameter,
 	isValidTime,
-	isValidTimePair,
+	isValidTimeRange,
 	isValidTriggerType,
 	isValidVector2,
 } from 'isValidParams'
@@ -25,7 +25,7 @@ export { Easing } from 'types/Easing'
 export { Layer } from 'types/Layer'
 export { LoopType } from 'types/LoopType'
 export { Origin } from 'types/Origin'
-export { TimePair } from 'types/TimePair'
+export { TimeRange } from 'types/TimeRange'
 export { Time, Timestamp } from 'types/Timestamp'
 export { TriggerType } from 'types/TriggerType'
 export { Vector2 } from 'types/Vector2'

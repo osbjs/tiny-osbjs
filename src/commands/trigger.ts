@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject, setIsInvokingTrigger } from 'context'
 import { isValidTriggerType } from 'isValidParams'
 import { TriggerCommand } from 'types/Command'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { Addition, SampleSet, TriggerType } from 'types/TriggerType'
 import { validateAndExtractTime } from './utils/extractCommandArguments'
 
@@ -19,7 +19,7 @@ import { validateAndExtractTime } from './utils/extractCommandArguments'
  * @param time [startTime, endTime] time in milliseconds/timestamp at which the trigger is valid.
  * @param invokeFunction The commands that should be run when the trigger group is created.
  */
-export function trigger(time: TimePair, triggerType: TriggerType, invokeFunction: () => void) {
+export function trigger(time: TimeRange, triggerType: TriggerType, invokeFunction: () => void) {
 	if (!isValidTriggerType(triggerType)) throw new Error(`${triggerType} is not a valid trigger type.`)
 
 	const [startTime, endTime] = validateAndExtractTime(time)

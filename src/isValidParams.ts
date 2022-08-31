@@ -6,7 +6,7 @@ import { Easing } from 'types/Easing'
 import { Layer } from 'types/Layer'
 import { LoopType } from 'types/LoopType'
 import { Origin } from 'types/Origin'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { Time } from 'types/Timestamp'
 import { TriggerType } from 'types/TriggerType'
 import { Vector2 } from 'types/Vector2'
@@ -61,7 +61,7 @@ export function isValidContext(context: any): context is Context {
 	)
 }
 
-export function isValidTimePair(times: any): times is TimePair {
+export function isValidTimeRange(times: any): times is TimeRange {
 	return (
 		Array.isArray(times) &&
 		times.length == 2 &&

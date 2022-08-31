@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject } from 'context'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { Time } from 'types/Timestamp'
 import { Vector2 } from 'types/Vector2'
 import { defaultEasingIfUndefined, validateAndExtractTime, validateVector2Arguments } from './utils/extractCommandArguments'
@@ -15,7 +15,7 @@ import { defaultEasingIfUndefined, validateAndExtractTime, validateVector2Argume
  * @param endScaleVector Scale factor at the end of the animation.
  * @param easing How the command should "accelerate".
  */
-export function scaleVec(time: Time | TimePair, startScaleVector: Vector2, endScaleVector: Vector2 = startScaleVector, easing?: Easing) {
+export function scaleVec(time: Time | TimeRange, startScaleVector: Vector2, endScaleVector: Vector2 = startScaleVector, easing?: Easing) {
 	const [startTime, endTime] = validateAndExtractTime(time)
 	const [startValue, endValue] = validateVector2Arguments(startScaleVector, endScaleVector, 'ScaleVector')
 

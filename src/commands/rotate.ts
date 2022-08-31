@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject } from 'context'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { Time } from 'types/Timestamp'
 import { defaultEasingIfUndefined, validateAndExtractTime, validateNumericArguments } from './utils/extractCommandArguments'
 
@@ -14,7 +14,7 @@ import { defaultEasingIfUndefined, validateAndExtractTime, validateNumericArgume
  * @param endAngle Angle to rotate by in radians at the end of the animation.
  * @param easing How the command should "accelerate".
  */
-export function rotate(time: Time | TimePair, startAngle: number, endAngle: number = startAngle, easing?: Easing) {
+export function rotate(time: Time | TimeRange, startAngle: number, endAngle: number = startAngle, easing?: Easing) {
 	const [startTime, endTime] = validateAndExtractTime(time)
 	const [startValue, endValue] = validateNumericArguments(startAngle, endAngle, 'Angle')
 

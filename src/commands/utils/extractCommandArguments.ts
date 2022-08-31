@@ -1,14 +1,14 @@
-import { isValidColor, isValidEasing, isValidTime, isValidTimePair, isValidVector2 } from 'isValidParams'
+import { isValidColor, isValidEasing, isValidTime, isValidTimeRange, isValidVector2 } from 'isValidParams'
 import { tryParseTimestamp } from 'tryParseTimestamp'
 import { Color } from 'types/Color'
 import { Easing } from 'types/Easing'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { Time } from 'types/Timestamp'
 import { Vector2 } from 'types/Vector2'
 import { round, roundColor, roundVec } from 'utils/round'
 
-export function validateAndExtractTime(time: Time | TimePair): [number, number] {
-	if (isValidTimePair(time)) {
+export function validateAndExtractTime(time: Time | TimeRange): [number, number] {
+	if (isValidTimeRange(time)) {
 		return [tryParseTimestamp(time[0]), tryParseTimestamp(time[1])]
 	} else {
 		if (!isValidTime(time)) throw new TypeError('`time` must be a number or an osu timestamp, ex: 00:01:300.')

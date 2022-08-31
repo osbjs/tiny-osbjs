@@ -1,7 +1,7 @@
 import { addCommandToCurrentObject } from 'context'
 import { Parameter, ParameterCommand } from 'types/Command'
 import { Easing } from 'types/Easing'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { validateAndExtractTime } from './utils/extractCommandArguments'
 
 /**
@@ -30,7 +30,7 @@ function parameter(startTime: number, endTime: number, parameter: Parameter) {
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function additiveBlending(time: TimePair) {
+export function additiveBlending(time: TimeRange) {
 	const [startTime, endTime] = validateAndExtractTime(time)
 
 	parameter(startTime, endTime, Parameter.AdditiveBlending)
@@ -41,7 +41,7 @@ export function additiveBlending(time: TimePair) {
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function flipHorizontal(time: TimePair) {
+export function flipHorizontal(time: TimeRange) {
 	const [startTime, endTime] = validateAndExtractTime(time)
 
 	parameter(startTime, endTime, Parameter.FlipHorizontal)
@@ -52,7 +52,7 @@ export function flipHorizontal(time: TimePair) {
  * @param time Time in milliseconds/timestamp indicates when the event will occur.
  * Pass in [startTime, endTime] if you want the effect to only apply during a specific period.
  */
-export function flipVertical(time: TimePair) {
+export function flipVertical(time: TimeRange) {
 	const [startTime, endTime] = validateAndExtractTime(time)
 
 	parameter(startTime, endTime, Parameter.FlipVertical)

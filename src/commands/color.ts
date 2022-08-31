@@ -2,7 +2,7 @@ import { addCommandToCurrentObject } from 'context'
 import { Color } from 'types/Color'
 import { Command } from 'types/Command'
 import { Easing } from 'types/Easing'
-import { TimePair } from 'types/TimePair'
+import { TimeRange } from 'types/TimeRange'
 import { Time } from 'types/Timestamp'
 import { defaultEasingIfUndefined, validateAndExtractTime, validateColorArguments } from './utils/extractCommandArguments'
 
@@ -18,7 +18,7 @@ import { defaultEasingIfUndefined, validateAndExtractTime, validateColorArgument
  * A valid Color is an array contains 3 numbers [r,g,b] respectively.
  * @param easing How the command should "accelerate".
  */
-export function color(time: Time | TimePair, startColor: Color, endColor: Color = startColor, easing?: Easing) {
+export function color(time: Time | TimeRange, startColor: Color, endColor: Color = startColor, easing?: Easing) {
 	const [startTime, endTime] = validateAndExtractTime(time)
 	const [startValue, endValue] = validateColorArguments(startColor, endColor)
 
