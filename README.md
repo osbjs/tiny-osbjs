@@ -3,7 +3,7 @@ A declarative osu! storyboard library with zero dependencies and zero configurat
 
 ## Install
 ```bash
-npm install @osbjs/tiny-osbjs@latest
+npm i @osbjs/tiny-osbjs@latest
 ```
 
 ## Bootstrap your project using `create-tiny-sb`
@@ -19,23 +19,23 @@ It's strongly recommended to use `TypeScript` and a text editor/IDE with good `T
 npm install -D typescript
 ```
 
-Install `node-dev` as a global package so you can use it anywhere (you will only need to do this once).
+Install `tsx` as a global package so you can use it anywhere (you will only need to do this once), or as an devDependency.
+`tsx` is a CLI command (alternative to node) that allows you to run TypeScript/JavaScript right in the terminal. It also watches for file changes to speed up your development.
 ```bash
-npm install -g node-dev
+npm i -g tsx
 ```
-
-If you are using TypeScript, install `ts-node` as dev-dependency
+or
 ```bash
-npm install -D ts-node
+npm i -D tsx
 ```
 
 Then add this script to your package.json:
 ```js
 //...
 "scripts": {
-	"start": "node-dev index.js --respawn --clear --notify=false" 
+	"start": "tsx watch index.js" 
 	// or if you are using TypeScript
-	"start": "node-dev index.ts --respawn --clear --notify=false" 
+	"start": "tsx watch index.ts" 
 }
 ```
 `index.js` (`index.ts`) is the entry point to your storyboard. This way when you run `npm start` it will automatically rebuild your storyboard when you change your code.
