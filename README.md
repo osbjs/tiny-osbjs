@@ -19,7 +19,7 @@ It's strongly recommended to use `TypeScript` and a text editor/IDE with good `T
 npm install -D typescript
 ```
 
-Install `tsx` as a global package so you can use it anywhere (you will only need to do this once), or as an devDependency.
+Install `tsx` as a global package so you can use it anywhere (you will only need to do this once), or as a devDependency.
 `tsx` is a CLI command (alternative to node) that allows you to run TypeScript/JavaScript right in the terminal. It also watches for file changes to speed up your development.
 ```bash
 npm i -g tsx
