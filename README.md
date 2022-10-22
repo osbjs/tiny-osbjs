@@ -90,9 +90,9 @@ difficulty2Storyboard()
 
 Most of the commands will have their syntax looking like this (except for a few special commands):
 ```ts
-commandName([startTime, endTime], startValue, endValue, easing) // commands that change overtime
-commandName([startTime, endTime], value) // commands that are only effective in a specific duration
-commandName(time, value) // commands that only need to be set once
+commandName([startTime, endTime], startValue, endValue, easing) // command that changes overtime
+commandName([startTime, endTime], value) // command that is only effective in a specific time range
+commandName(time, value) // command that only need to be set once
 ```
 
 The killer-feature of `tiny-osbjs` is that you can specify the commands in a declarative way and the library will know which objects they are refering to.
